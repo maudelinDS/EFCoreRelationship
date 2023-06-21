@@ -84,5 +84,14 @@ namespace EFCoreRelationship.Controllers
                 return Unauthorized(); 
             }
         }
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            // Code pour effectuer la déconnexion
+            // Par exemple, supprimez les informations d'authentification du cookie ou de la session
+
+            // Redirigez vers la page de connexion ou une autre page appropriée
+            return RedirectToAction("Login");
+        }
     }
 }
