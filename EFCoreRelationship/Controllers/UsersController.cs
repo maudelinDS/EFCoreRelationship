@@ -23,7 +23,7 @@ namespace EFCoreRelationship.Controllers
         public async Task<ActionResult<List<User>>> GetAllUsers()
         {
             var users = await appDbContext.Users
-            
+            .Include(u => u.UserProjets)
 
                     .ToListAsync();
             return users;

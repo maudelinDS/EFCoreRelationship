@@ -4,6 +4,7 @@ using EFCoreRelationship.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCoreRelationship.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230621141426_UpdateUserTable")]
+    partial class UpdateUserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -229,9 +232,6 @@ namespace EFCoreRelationship.Data.Migrations
                     b.Property<int?>("JobId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProjetId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("RoleId")
                         .HasColumnType("int");
 
@@ -254,8 +254,6 @@ namespace EFCoreRelationship.Data.Migrations
 
                     b.HasIndex("JobId");
 
-                    b.HasIndex("ProjetId");
-
                     b.HasIndex("RoleId");
 
                     b.HasIndex("UserEmail")
@@ -272,9 +270,6 @@ namespace EFCoreRelationship.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserProjetId"));
-
-                    b.Property<int?>("CompetenceId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("End")
                         .HasColumnType("datetime2");
@@ -293,8 +288,6 @@ namespace EFCoreRelationship.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("UserProjetId");
-
-                    b.HasIndex("CompetenceId");
 
                     b.HasIndex("ProjetId");
 
@@ -374,28 +367,18 @@ namespace EFCoreRelationship.Data.Migrations
                         .WithMany("Users")
                         .HasForeignKey("JobId");
 
-                    b.HasOne("EFCoreRelationship.Projet", "Projet")
-                        .WithMany()
-                        .HasForeignKey("ProjetId");
-
                     b.HasOne("EFCoreRelationship.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId");
 
                     b.Navigation("Job");
 
-                    b.Navigation("Projet");
-
                     b.Navigation("Role");
                 });
 
             modelBuilder.Entity("EFCoreRelationship.UserProjet", b =>
                 {
-                    b.HasOne("EFCoreRelationship.Competence", "Competence")
-                        .WithMany()
-                        .HasForeignKey("CompetenceId");
-
-                    b.HasOne("EFCoreRelationship.Projet", "Projet")
+                    b.HasOne("EFCoreRelationship.Projet", "Projets")
                         .WithMany()
                         .HasForeignKey("ProjetId");
 
@@ -409,9 +392,7 @@ namespace EFCoreRelationship.Data.Migrations
                         .WithMany()
                         .HasForeignKey("UsersUserId");
 
-                    b.Navigation("Competence");
-
-                    b.Navigation("Projet");
+                    b.Navigation("Projets");
 
                     b.Navigation("User");
 

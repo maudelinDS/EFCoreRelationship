@@ -27,9 +27,14 @@ namespace EFCoreRelationship
 
         public int? RoleId { get; set; }
         [JsonIgnore]
-        public Role? Role { get; set; }
+        public Role? Role { get; set; } 
+        
+        public int? ProjetId { get; set; }
+        [JsonIgnore]
+        public Projet? Projet { get; set; }
         
         
+            public List<UserProjet> UserProjets { get; set; }
 
 
 

@@ -14,7 +14,13 @@ namespace EFCoreRelationship
         public int? UserId { get; set; }
         
 
-        public Projet? Projets { get; set; }
+        public Projet? Projet { get; set; }
         public int? ProjetId { get; set; }
+
+        public User User { get; set; }
+
+
+        public Competence? Competence { get; set; }
+        public int? CompetenceId { get; set; }
     }
 }

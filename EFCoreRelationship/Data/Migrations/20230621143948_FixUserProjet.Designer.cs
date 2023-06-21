@@ -4,6 +4,7 @@ using EFCoreRelationship.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCoreRelationship.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230621143948_FixUserProjet")]
+    partial class FixUserProjet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -229,9 +232,6 @@ namespace EFCoreRelationship.Data.Migrations
                     b.Property<int?>("JobId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProjetId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("RoleId")
                         .HasColumnType("int");
 
@@ -253,8 +253,6 @@ namespace EFCoreRelationship.Data.Migrations
                     b.HasKey("UserId");
 
                     b.HasIndex("JobId");
-
-                    b.HasIndex("ProjetId");
 
                     b.HasIndex("RoleId");
 
@@ -374,17 +372,11 @@ namespace EFCoreRelationship.Data.Migrations
                         .WithMany("Users")
                         .HasForeignKey("JobId");
 
-                    b.HasOne("EFCoreRelationship.Projet", "Projet")
-                        .WithMany()
-                        .HasForeignKey("ProjetId");
-
                     b.HasOne("EFCoreRelationship.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId");
 
                     b.Navigation("Job");
-
-                    b.Navigation("Projet");
 
                     b.Navigation("Role");
                 });
