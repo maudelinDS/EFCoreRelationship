@@ -81,53 +81,50 @@ export default function AppCrudStudent() {
                         alignItems: 'center',
                         tableLayout: 'fixed',
                     }}>
-                        <TableHead style={{width: '100%'}}>
-                            <TableRow style={{display:'flex',width: '100%', flexDirection:'row',justifyContent: 'space-between',alignItems:'center', padding: '30px'}}>
-                                <TableCell style={{textAlign: 'center',height: '50px'}}>img</TableCell>
+                        <TableHead style={{width: '98%'}}>
+                            <TableRow style={{display:'flex',width: '100%',justifyContent: 'space-between', textAlign: 'center'}}>
+                                <TableCell style={{height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>img</TableCell>
+                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>Id</TableCell>
+                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>First N.</TableCell>
+                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>Last N.</TableCell>
+                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>Email</TableCell>
 
-                                <TableCell style={{ textAlign: 'center',height: '80px'}}>Id</TableCell>
-                                <TableCell style={{ textAlign: 'center',height: '80px'}}>F Name</TableCell>
-                                <TableCell style={{ textAlign: 'center',height: '80px'}}>L Name</TableCell>
-                                <TableCell style={{ textAlign: 'center',height: '80px'}}>Email</TableCell>
-{/*
-                                <TableCell style={{ textAlign: 'center',height: '80px'}}>Password</TableCell>
-*/}
-                                <TableCell style={{ textAlign: 'center',height: '80px'}}>Phone</TableCell>
-                                <TableCell style={{ textAlign: 'center',height: '80px'}}>Job</TableCell>
-                                <TableCell style={{ textAlign: 'center',height: '80px'}}>Role</TableCell>
-                                <TableCell style={{ textAlign: 'center',height: '80px',width: '60px'}}></TableCell>
-                                <TableCell style={{ textAlign: 'center',height: '80px', width: '60px'}}></TableCell>
+                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>Phone</TableCell>
+                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>Job</TableCell>
+                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>Role</TableCell>
+                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}></TableCell>
+                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}></TableCell>
                             </TableRow>
                         </TableHead>
 
                         <TableBody style={{overflow: "scroll", height: "600px", width: '100%'}}>
                             {users.map((user) => (
-                                    <TableRow key={user.userId} style={{display: 'flex', textAlign: 'center',justifyContent: 'space-between',alignItems:'center'}}>
-                                    <TableCell >
+                                    <TableRow key={user.userId} style={{display: 'flex', flexDirection:'row',justifyContent: 'space-between',alignItems:'center', padding: '16px'}}>
+                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>
                                         <img src={UserIcon} alt="User Icon" width="24" height="24"/>
-                                    </TableCell>s
-                                    <TableCell style={{width: '50px',height: '50px'}}>{user.userId}</TableCell>
-                                    <TableCell style={{width: '50px',height: '50px'}}>{user.userFirstName}
                                     </TableCell>
-                                    <TableCell style={{width: '50px',height: '50px'}}>{user.userLastName/*{/* > 8 ? user.userLastName.substring(0, 4) + '...' : user.userLastName}*/}</TableCell>
-                                    <TableCell style={{width: '50px',height: '50px'}}>  {user.userEmail }
+                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.userId}</TableCell>
+                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.userFirstName}
                                     </TableCell>
-                                   {/* <TableCell style={{width: '50px',height: '50px'}}>  {user.userPassword && user.userPassword. > 8 ? user.userPassword.substring(0, 4) + '...' : user.userPassword}
-
-                                    </TableCell>*/}
-                                    <TableCell style={{width: '50px',height: '50px'}}>{user.userPhone}</TableCell>
-                                    <TableCell style={{width: '50px',height: '50px'}}>{user.jobId}</TableCell>
-                                    <TableCell style={{width: '50px',height: '50px'}}>{user.roleId}</TableCell>
-                                    <TableCell style={{height: '50px',display:'flex',gap: '10px'}}>
+                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.userLastName/*{/* > 8 ? user.userLastName.substring(0, 4) + '...' : user.userLastName}*/}</TableCell>
+                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>  {user.userEmail}</TableCell>
+                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.userPhone}</TableCell>
+                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.jobId}</TableCell>
+                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.roleId}</TableCell>
+                                    <TableCell style={{width: '90px' , height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>
                                         <Button
                                             variant="contained"
                                             color="primary"
                                             onClick={() => setStudentCurrentlyBeingUpdated(user)}
-                                            style={{background: '#141E66',padding: '3px', width: '50px'}}
+                                            style={{background: '#141E66'}}
                                             size='small'
                                         >
                                             Update
                                         </Button>
+
+                                    </TableCell>
+                                        <TableCell style={{height: '80px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>
+
                                         <Button
                                             variant="contained"
                                             color="primary"
@@ -152,14 +149,14 @@ export default function AppCrudStudent() {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => setShowingCreateNewStudentForm(true)}
-                    style={{marginBottom: '10px', marginTop: '20px', background: '#8FC62E'}}
-                >
-                    Create new users
-                </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => setShowingCreateNewStudentForm(true)}
+                        style={{marginBottom: '10px', marginTop: '20px', background: '#8FC62E'}}
+                    >
+                        Create new users
+                    </Button>
             </Box>
         )
             ;

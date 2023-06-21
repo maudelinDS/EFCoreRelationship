@@ -12,6 +12,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import {ReactComponent as Logo} from '../src/images/logo-white.svg';
 import Section from "./Sections";
 import Constants from "./utilities/Constants";
+import { useState } from 'react';
 
 
 
@@ -20,6 +21,26 @@ export default function ButtonAppBar({ showSection }) {
 
     const hideSection = location.pathname === '/login';
 
+    const [userName, setUserName] = useState('');
+
+    function getStudents() {
+        const url = Constants.API_URL_GET_ALL_STUDENTS;
+
+        fetch(url, {
+            method: 'GET',
+            mode: 'cors'
+        })
+            .then(response => response.json())
+            .then(studentsFromServer => {
+                const user = studentsFromServer.name; // Assuming the response contains the name field
+                setUserName(user);
+                console.log(user)
+            })
+            .catch((error) => {
+                console.log(error);
+                alert(error);
+            });
+    }
     function handleLogout() {
         // Code pour envoyer une requête POST vers l'URL de déconnexion
 
@@ -50,6 +71,12 @@ export default function ButtonAppBar({ showSection }) {
                         <ExitToAppIcon /> {/* Icône de déconnexion */}
                         <Typography variant="body1" sx={{ ml: 1 }}>Déconnexion</Typography> {/* Texte du bouton */}
                     </IconButton>
+                    {userName && (
+                        <Typography variant="body1" sx={{ ml: 1 }}>
+                            {`Bonjour, ${userName}`}
+                        </Typography>
+                    )}
+
                 </Toolbar>
                 {!hideSection  && <Section />}
 

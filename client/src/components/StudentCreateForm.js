@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Constants from "../utilities/Constants";
 import bcrypt from 'bcryptjs';
+import {Button, FormControl, FormHelperText, Input, InputLabel, TextField} from '@mui/material';
 
 export default function StudentCreateForm(props) {
 
@@ -50,7 +51,6 @@ export default function StudentCreateForm(props) {
             .then(response => response.json())
             .then(responseFromServer => {
                 console.log(responseFromServer);
-                console.log(formData.firstName, formData.lastName, formData.email, formData.password, formData.phone, formData.job, formData.role);
 
             })
             .catch((error) => {
@@ -61,56 +61,42 @@ export default function StudentCreateForm(props) {
 
     };
     return (
-        <form action="" className="w-100 px-5" onSubmit={handleSubmit}>
+        <form action="" className="w-100 px-5" onSubmit={handleSubmit}
+              style={{display: 'flex', flexDirection: 'column', gap: '50px'}}>
             <h1 className="mt-5">Create new User</h1>
-            <div className="mt-5">
-                <label htmlFor="" className="h3 form-label">Student First Name</label>
-                <input type="text" value={formData.userFirstName} name="userFirstName" className="form-control"
-                       onChange={handleChange}/>
-            </div>
-
-            <div className="mt-4">
-                <label htmlFor="" className="h3 form-label">Student Last Name</label>
-                <input type="text" value={formData.userLastName} name="userLastName" className="form-control"
-                       onChange={handleChange}/>
-            </div>
-
-            <div className="mt-4">
-                <label htmlFor="" className="h3 form-label">Student Email</label>
-                <input type="email" value={formData.userEmail} name="userEmail" className="form-control"
-                       onChange={handleChange}/>
-            </div>
-
-            <div className="mt-4">
-                <label htmlFor="" className="h3 form-label">Student Phone</label>
-                <input type="tel" value={formData.userPhone} name="userPhone" className="form-control"
-                       onChange={handleChange}/>
-            </div>
 
 
-            <div className="mt-4">
-                <label htmlFor="" className="h3 form-label">Student Student</label>
-                <input type="password" value={formData.userPassword} name="userPassword" className="form-control"
-                       onChange={handleChange}/>
-            </div>
 
-            <div className="mt-4">
-                <label htmlFor="" className="h3 form-label">Job Student</label>
-                <input type="number" value={formData.jobId} name="jobId" className="form-control" onChange={handleChange} />
-            </div>
-
-            <div className="mt-4">
-                <label htmlFor="" className="h3 form-label">Role Student</label>
-                <input type="number" value={formData.roleId} name="roleId" className="form-control" onChange={handleChange} />
-            </div>
+            <TextField type="text" value={formData.userFirstName} id="userFirstName" label="userFirstName" name="userFirstName" variant="outlined" onChange={handleChange}/>
 
 
-            <button onClick={handleSubmit} className="btn btn-dark btn-lg w-100 mt-5">
+            <TextField type="text" value={formData.userLastName} id="userLastName" label="userLastName" name="userLastName" variant="outlined" onChange={handleChange}/>
+
+            <TextField type="email" value={formData.userEmail} id="userEmail" label="userEmail" name="userEmail" variant="outlined" onChange={handleChange}/>
+
+            <TextField type="tel" value={formData.userPhone} id="userPhone" label="userPhone" name="userPhone" variant="outlined" onChange={handleChange}/>
+
+            <TextField type="password" value={formData.userPassword} id="userPassword" label="userPassword" name="userPassword" variant="outlined" onChange={handleChange}/>
+
+            <TextField type="number" value={formData.jobId} id="jobId" label="jobId" name="jobId" variant="outlined" onChange={handleChange}/>
+
+            <TextField type="number" value={formData.roleId} id="roleId" label="roleId" name="roleId" variant="outlined" onChange={handleChange}/>
+
+
+            <button onClick={handleSubmit} className="btn btn-dark btn-lg w-100 mt-5"
+                    style={{marginBottom: '10px', marginTop: '20px', background: '#8FC62E'}}
+            >
                 Submit
             </button>
-            <button onClick={() => props.onStudentCreated(null)} className="btn secondary btn-lg w-100 mt-3">
+            <button
+
+                color="primary" onClick={() => props.onStudentCreated(null)}
+                className="btn secondary btn-lg w-100 mt-3">
+
                 Cancel
             </button>
+
+
         </form>
     );
 }
