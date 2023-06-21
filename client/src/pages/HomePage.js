@@ -7,7 +7,7 @@ import Tabs from "../Tabs"; // Import using relative path
 
 const Home = () => {
 
-    return <div style={{background: 'rgba(91,97,100,0.15)'}}>
+    return <div style={{background: 'rgba(91,96,100,0.15)'}}>
         <NavBar/>
         <Section/>
 
