@@ -84,6 +84,7 @@ namespace EFCoreRelationship.Controllers
             user.UserPassword= updatedUser.UserPassword;
             user.RoleId= updatedUser.RoleId;
             user.JobId= updatedUser.JobId;      
+            user.ProjetId= updatedUser.ProjetId;      
 
         appDbContext.Users.Update(user);
             await appDbContext.SaveChangesAsync();

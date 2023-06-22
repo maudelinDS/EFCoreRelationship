@@ -32,9 +32,9 @@ namespace EFCoreRelationship
         public int? ProjetId { get; set; }
         [JsonIgnore]
         public Projet? Projet { get; set; }
-        
-        
-            public List<UserProjet> UserProjets { get; set; }
+
+        [JsonIgnore]
+        public List<UserProjet>? UserProjets { get; set; }
 
 
 

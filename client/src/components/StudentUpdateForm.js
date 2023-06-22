@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Constants from "../utilities/Constants";
 import bcrypt from "bcryptjs";
-import {TextField} from "@mui/material";
+import {Button, TextField} from "@mui/material";
 
 export default function StudentUpdateForm(props) {
 
@@ -13,6 +13,7 @@ export default function StudentUpdateForm(props) {
         userPhone: props.student.userPhone || '',
         jobId: props.student.jobId || '',
         roleId: props.student.roleId || '',
+        projetId: props.student.projetId || '',
     });
     const [formData, setFormData] = useState(initialFormData);
 
@@ -36,7 +37,7 @@ export default function StudentUpdateForm(props) {
             userPassword:hashedPassword,
             userPhone: parseInt(formData.userPhone),
             jobId: parseInt(formData.jobId),
-            roleId: parseInt(formData.roleId),
+            projetId: parseInt(formData.projetId),
 
         };
         const url = Constants.API_URL_UPDATE_STUDENT;
@@ -95,9 +96,18 @@ export default function StudentUpdateForm(props) {
 
             <TextField type="number" value={formData.roleId} id="roleId" label="roleId" name="roleId" variant="outlined" onChange={handleChange}/>
 
-            <button onClick={handleSubmit} className="btn btn-dark btn-lg w-100 mt-5">
+            <TextField type="number" value={formData.projetId} id="projetId" label="projetId" name="projetId" variant="outlined" onChange={handleChange}/>
+
+
+
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={handleSubmit}
+                style={{marginBottom: '10px', marginTop: '20px', background: '#8FC62E'}}
+            >
                 Submit
-            </button>
+            </Button>
             <button onClick={() => props.onStudentUpdated(null)} className="btn secondary btn-lg w-100 mt-3">
                 Cancel
             </button>

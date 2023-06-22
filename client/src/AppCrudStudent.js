@@ -92,12 +92,13 @@ export default function AppCrudStudent() {
                                 <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>Phone</TableCell>
                                 <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>Job</TableCell>
                                 <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>Role</TableCell>
+                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>Projet</TableCell>
                                 <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}></TableCell>
                                 <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}></TableCell>
                             </TableRow>
                         </TableHead>
 
-                        <TableBody style={{overflow: "scroll", height: "600px", width: '100%'}}>
+                        <TableBody style={{overflow: "scroll", height: "800px", width: '100%', textAlign: 'center'}}>
                             {users.map((user) => (
                                     <TableRow key={user.userId} style={{display: 'flex', flexDirection:'row',justifyContent: 'space-between',alignItems:'center', padding: '16px'}}>
                                     <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>
@@ -106,11 +107,12 @@ export default function AppCrudStudent() {
                                     <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.userId}</TableCell>
                                     <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.userFirstName}
                                     </TableCell>
-                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.userLastName/*{/* > 8 ? user.userLastName.substring(0, 4) + '...' : user.userLastName}*/}</TableCell>
+                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center', textAlign:'center'}}>{user.userLastName/*{/* > 8 ? user.userLastName.substring(0, 4) + '...' : user.userLastName}*/}</TableCell>
                                     <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>  {user.userEmail}</TableCell>
                                     <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.userPhone}</TableCell>
                                     <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.jobId}</TableCell>
                                     <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.roleId}</TableCell>
+                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.projetId}</TableCell>
                                     <TableCell style={{width: '90px' , height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>
                                         <Button
                                             variant="contained"

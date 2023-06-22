@@ -12,7 +12,8 @@ export default function StudentCreateForm(props) {
         userPassword: "Password Etudiant x",
         userPhone: "Phone Etudiant x",
         jobId: "", // Modifier la valeur ici
-        roleId: "" // Modifier la valeur ici
+        roleId: "" ,// Modifier la valeur ici
+        projetId: "" // Modifier la valeur ici
     });
 
     const [formData, setFormData] = useState(initialFormData);
@@ -37,7 +38,8 @@ export default function StudentCreateForm(props) {
             userPassword: hashedPassword,
             userPhone: formData.userPhone,
             jobId: parseInt(formData.jobId),
-            roleId: parseInt(formData.roleId)
+            roleId: parseInt(formData.roleId),
+            projetId: parseInt(formData.projetId)
         };
         const url = Constants.API_URL_CREATE_STUDENT;
 
@@ -81,6 +83,8 @@ export default function StudentCreateForm(props) {
             <TextField type="number" value={formData.jobId} id="jobId" label="jobId" name="jobId" variant="outlined" onChange={handleChange}/>
 
             <TextField type="number" value={formData.roleId} id="roleId" label="roleId" name="roleId" variant="outlined" onChange={handleChange}/>
+
+            <TextField type="number" value={formData.projetId} id="projetId" label="projetId" name="projetId" variant="outlined" onChange={handleChange}/>
 
 
             <button onClick={handleSubmit} className="btn btn-dark btn-lg w-100 mt-5"
