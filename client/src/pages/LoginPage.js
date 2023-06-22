@@ -23,6 +23,7 @@ export default function SignIn() {
 
         try {
             const url = Constants.LOGIN;
+            const checkUrl = Constants.CONNECTE;
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -33,26 +34,24 @@ export default function SignIn() {
                     UserPassword: data.get('UserPassword'),
                 }),
             });
-
-            const urlCheck = Constants.CONNECTE;
-            const responseCheck = await fetch(urlCheck, {
+            const responseCheck = await fetch(checkUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    UserEmail: data.get('UserEmail'),
-                    UserPassword: data.get('UserPassword'),
+                    jwd: data.get('jwd'),
                 }),
             });
-            console.log(responseCheck)
-            if (responseCheck.ok) {
-                // La connexion a réussi, vous pouvez effectuer des actions supplémentaires ici
-                const responseData = await responseCheck.json();
 
+            if (response.ok) {
+                // La connexion a réussi, vous pouvez effectuer des actions supplémentaires ici
+                const responseData = await response.json();
+                const userName = responseData.userName; // Assurez-vous de fournir le bon chemin d'accès à la propriété du nom d'utilisateur dans la réponse
+                setUserName(userName);
                 setIsLoggedIn(true);
 
-                console.log(responseData)
+                console.log(response)
                 console.log(isLoggedIn)
                 navigate("/student");
 
