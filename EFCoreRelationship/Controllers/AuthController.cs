@@ -43,13 +43,14 @@ namespace EFCoreRelationship.Controllers
         {
             var user = _repository.GetByEmail(dto.UserEmail);
 
-            if (user == null) return BadRequest(new { message = "Invalid" });
+            if (user == null)
+                return BadRequest(new { message = "Invalid" });
+
+            if (string.IsNullOrEmpty(dto.UserPassword) || string.IsNullOrEmpty(user.UserPassword))
+                return BadRequest(new { message = "Invalid" });
 
             if (!BCrypt.Net.BCrypt.Verify(dto.UserPassword, user.UserPassword))
-            {
                 return BadRequest(new { message = "Invalid" });
-            }
-            
             //encode jwt
             var jwt = _jwtService.Generate(user.UserId);
 
@@ -87,8 +88,8 @@ namespace EFCoreRelationship.Controllers
         [HttpPost("logout")]
         public IActionResult Logout()
         {
-          
-            return RedirectToAction("Login");
+            Response.Cookies.Delete("jwt");
+            return Ok();
         }
     }
 }

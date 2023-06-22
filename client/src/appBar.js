@@ -12,7 +12,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import {ReactComponent as Logo} from '../src/images/logo-white.svg';
 import Section from "./Sections";
 import Constants from "./utilities/Constants";
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 
 
 
@@ -23,6 +23,10 @@ export default function ButtonAppBar({ showSection }) {
 
     const [userName, setUserName] = useState('');
 
+    useEffect(() => {
+        getStudents();
+    }, []);
+
     function getStudents() {
         const url = Constants.API_URL_GET_ALL_STUDENTS;
 
@@ -32,7 +36,8 @@ export default function ButtonAppBar({ showSection }) {
         })
             .then(response => response.json())
             .then(studentsFromServer => {
-                const user = studentsFromServer.name; // Assuming the response contains the name field
+                console.log(studentsFromServer);
+                const user = studentsFromServer.userFirstName; // Assuming the response contains the name field
                 setUserName(user);
                 console.log(user)
             })
@@ -42,17 +47,20 @@ export default function ButtonAppBar({ showSection }) {
             });
     }
     function handleLogout() {
-        // Code pour envoyer une requête POST vers l'URL de déconnexion
-
         const url = Constants.LOGOUT;
 
         fetch(url, {
-
-            method: 'POST'
+            method: 'POST',
+            credentials: 'include' // Inclure les cookies dans la requête
         })
             .then(response => {
-                console.log(response);
-
+                if (response.ok) {
+                    // Déconnexion réussie, effectuez les actions nécessaires (par exemple, rediriger vers la page de connexion)
+                    window.location.href = '/login';
+                } else {
+                    // La déconnexion a échoué, affichez un message d'erreur ou effectuez d'autres actions
+                    console.log('Failed to logout');
+                }
             })
             .catch(error => {
                 console.log(error);

@@ -37,6 +37,7 @@ export default function StudentUpdateForm(props) {
             userPassword:hashedPassword,
             userPhone: parseInt(formData.userPhone),
             jobId: parseInt(formData.jobId),
+            roleId: parseInt(formData.roleId),
             projetId: parseInt(formData.projetId),
 
         };
