@@ -33,12 +33,26 @@ export default function SignIn() {
                     UserPassword: data.get('UserPassword'),
                 }),
             });
-            if (response.ok) {
+
+            const urlCheck = Constants.CONNECTE;
+            const responseCheck = await fetch(urlCheck, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    UserEmail: data.get('UserEmail'),
+                    UserPassword: data.get('UserPassword'),
+                }),
+            });
+            console.log(responseCheck)
+            if (responseCheck.ok) {
                 // La connexion a réussi, vous pouvez effectuer des actions supplémentaires ici
-                const responseData = await response.json();
-                const userName = responseData.userName; // Assurez-vous de fournir le bon chemin d'accès à la propriété du nom d'utilisateur dans la réponse
-                setUserName(userName);
+                const responseData = await responseCheck.json();
+
                 setIsLoggedIn(true);
+
+                console.log(responseData)
                 console.log(isLoggedIn)
                 navigate("/student");
 
