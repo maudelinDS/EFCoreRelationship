@@ -9,9 +9,12 @@ import imageURL from "../images/JOBK_Img_HeaderMobile_Home.png";
 import NavBar from "../appBar";
 import Constants from "../utilities/Constants";
 import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
 
 export default function SignIn() {
     const navigate = useNavigate();
+    const [userName, setUserName] = useState("");
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleSubmit = async (event) => {
 
@@ -32,11 +35,14 @@ export default function SignIn() {
             });
             if (response.ok) {
                 // La connexion a réussi, vous pouvez effectuer des actions supplémentaires ici
-                const responseData = response.json();
-                console.log(responseData);
+                const responseData = await response.json();
+                const userName = responseData.userName; // Assurez-vous de fournir le bon chemin d'accès à la propriété du nom d'utilisateur dans la réponse
+                setUserName(userName);
+                setIsLoggedIn(true);
+                console.log(isLoggedIn)
                 navigate("/student");
 
-            } else {
+            }else {
                 // La connexion a échoué, vous pouvez gérer l'erreur ici
                 throw new Error('Échec de la connexion');
             }
@@ -62,8 +68,7 @@ export default function SignIn() {
 
     return (
         <Box sx={containerStyles}>
-            <NavBar/>
-
+            <NavBar onLogin={setUserName} />
             <Container component="main" maxWidth="sm" sx={{background: '#fff',}}>
                 <Typography component="h1" variant="h5" sx={{mt: 5}}>
                     Se connecter

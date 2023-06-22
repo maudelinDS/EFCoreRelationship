@@ -29,6 +29,7 @@ const ENDPOINTS = {
 
     LOGIN: 'api/login',
     LOGOUT: 'api/logout',
+    CONNECTE : 'api/user'
 };
 
 const development = {
@@ -58,6 +59,7 @@ const development = {
 
     LOGIN: `${API_BASE_URL_DEVELOPEMENT}/${ENDPOINTS.LOGIN}`,
     LOGOUT: `${API_BASE_URL_DEVELOPEMENT}/${ENDPOINTS.LOGOUT}`,
+    CONNECTE: `${API_BASE_URL_DEVELOPEMENT}/${ENDPOINTS.CONNECTE}`,
 };
 
 const production = {
@@ -88,6 +90,7 @@ const production = {
 
     LOGIN: `${API_BASE_URL_PRODUCTION}/${ENDPOINTS.LOGIN}`,
     LOGOUT: `${API_BASE_URL_PRODUCTION}/${ENDPOINTS.LOGOUT}`,
+    CONNECTE: `${API_BASE_URL_PRODUCTION}/${ENDPOINTS.CONNECTE}`,
 
 
 };

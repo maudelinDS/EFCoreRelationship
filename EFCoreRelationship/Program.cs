@@ -43,8 +43,7 @@ app.UseAuthorization();
 app.UseAuthentication();
 app.UseCors(options =>
 {
-   options.WithOrigins("http://localhost:7007");
-   //options.AllowAnyOrigin();
+    options.AllowAnyOrigin();
     options.AllowAnyMethod();
     options.AllowAnyHeader();
 });

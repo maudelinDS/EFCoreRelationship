@@ -12,23 +12,21 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import {ReactComponent as Logo} from '../src/images/logo-white.svg';
 import Section from "./Sections";
 import Constants from "./utilities/Constants";
-import {useEffect, useState} from 'react';
+import {useEffect} from "react";
 
 
 
-export default function ButtonAppBar({ showSection }) {
+export default function ButtonAppBar({ showSection , userName, isLoggedIn}) {
     const location = useLocation();
 
     const hideSection = location.pathname === '/login';
-
-    const [userName, setUserName] = useState('');
 
     useEffect(() => {
         getStudents();
     }, []);
 
     function getStudents() {
-        const url = Constants.API_URL_GET_ALL_STUDENTS;
+        const url = Constants.CONNECTE;
 
         fetch(url, {
             method: 'GET',
@@ -38,15 +36,13 @@ export default function ButtonAppBar({ showSection }) {
             .then(studentsFromServer => {
                 console.log(studentsFromServer);
                 const user = studentsFromServer.userFirstName; // Assuming the response contains the name field
-                setUserName(user);
-                console.log(user)
             })
             .catch((error) => {
                 console.log(error);
                 alert(error);
             });
     }
-    function handleLogout() {
+    function handleLogout(setIsLoggedIn) {
         const url = Constants.LOGOUT;
 
         fetch(url, {
@@ -55,7 +51,7 @@ export default function ButtonAppBar({ showSection }) {
         })
             .then(response => {
                 if (response.ok) {
-                    // Déconnexion réussie, effectuez les actions nécessaires (par exemple, rediriger vers la page de connexion)
+                    setIsLoggedIn(false);
                     window.location.href = '/login';
                 } else {
                     // La déconnexion a échoué, affichez un message d'erreur ou effectuez d'autres actions
@@ -67,32 +63,28 @@ export default function ButtonAppBar({ showSection }) {
             });
     }
 
+
     return (
         <Box>
-            <AppBar position="absolute" sx={{background: '#141E66', height: '86px'}}>
+            <AppBar position="absolute" sx={{ background: '#141E66', height: '86px' }}>
                 <Toolbar>
-
-                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                        <Logo/>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        <Logo />
                     </Typography>
-                    <IconButton edge="end" color="inherit" onClick={handleLogout}>
-                        <ExitToAppIcon /> {/* Icône de déconnexion */}
-                        <Typography variant="body1" sx={{ ml: 1 }}>Déconnexion</Typography> {/* Texte du bouton */}
-                    </IconButton>
-                    {userName && (
-                        <Typography variant="body1" sx={{ ml: 1 }}>
-                            {`Bonjour, ${userName}`}
-                        </Typography>
+                    {isLoggedIn ? (
+                        <>
+                            <IconButton edge="end" color="inherit" onClick={handleLogout}>
+                                <ExitToAppIcon />
+                                <Typography variant="body1" sx={{ ml: 1 }}>Déconnexion</Typography>
+                            </IconButton>
+                            <Typography variant="body1" sx={{ ml: 1 }}>{`Bonjour, ${userName}`}</Typography>
+                        </>
+                    ) : (
+                        <Typography variant="body1" sx={{ ml: 1 }}>Non connecté</Typography>
                     )}
-
                 </Toolbar>
-                {!hideSection  && <Section />}
-
+                {!hideSection && <Section />}
             </AppBar>
-
-
         </Box>
-
-    )
-        ;
+    );
 }
