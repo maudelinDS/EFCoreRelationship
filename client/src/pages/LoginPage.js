@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Button from "@mui/material/Button";
 import {Container, TextField} from "@mui/material";
@@ -10,20 +10,61 @@ import NavBar from "../appBar";
 import Constants from "../utilities/Constants";
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
+import Cookies from 'js-cookie';
 
 export default function SignIn() {
     const navigate = useNavigate();
     const [userName, setUserName] = useState("");
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+/*
+    const testCookie = async () => {
+        try {
+            const url = Constants.LOGIN;
+            const response = await fetch(url, {
+                method: "POST",
+                credentials: "include",
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Cookie received:", data.jwt);
+            } else {
+                console.error("Cookie not received");
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };*/
+
+
+
+    useEffect(() => {
+        const checkUser = async () => {
+            try {
+                const url = Constants.CONNECTE; // Remplacez par l'URL correspondante pour vérifier l'utilisateur
+                const response = await fetch(url, {
+                    method: "GET",
+                    credentials: "include",
+                });
+
+                if (response.ok) {
+                    navigate("/student"); // Rediriger vers la page appropriée si l'utilisateur est déjà connecté
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        checkUser();
+    }, []);
+
 
     const handleSubmit = async (event) => {
-
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
         try {
             const url = Constants.LOGIN;
-            const checkUrl = Constants.CONNECTE;
+            console.log(url)
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -32,31 +73,17 @@ export default function SignIn() {
                 body: JSON.stringify({
                     UserEmail: data.get('UserEmail'),
                     UserPassword: data.get('UserPassword'),
-                }),
-            });
-            const responseCheck = await fetch(checkUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    jwd: data.get('jwd'),
-                }),
-            });
 
+                }),
+            });
             if (response.ok) {
-                // La connexion a réussi, vous pouvez effectuer des actions supplémentaires ici
-                const responseData = await response.json();
-                const userName = responseData.userName; // Assurez-vous de fournir le bon chemin d'accès à la propriété du nom d'utilisateur dans la réponse
-                setUserName(userName);
-                setIsLoggedIn(true);
+                const cookieHeader = response.headers.get('Set-Cookie');
+               // const cookie = cookieHeader.split(';')[0].split('=')[1];
+              //  Cookies.set('jwt', cookie); // Sauvegarder le cookie dans 'jwt'
 
-                console.log(response)
-                console.log(isLoggedIn)
+                console.log(cookieHeader)
                 navigate("/student");
-
-            }else {
-                // La connexion a échoué, vous pouvez gérer l'erreur ici
+            } else {
                 throw new Error('Échec de la connexion');
             }
         } catch (error) {
@@ -65,6 +92,7 @@ export default function SignIn() {
 
 
     };
+
 
 
     const containerStyles = {
@@ -110,10 +138,7 @@ export default function SignIn() {
                         id="UserPassword"
                         autoComplete="current-password"
                     />
-                    {/* <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          /> */}
+
                     <Button
                         type="submit"
                         fullWidth

@@ -62,6 +62,7 @@ namespace EFCoreRelationship.Controllers
             return Ok(new
             {
                 message = "succes"
+                
             });
         }
         //decode jwt
@@ -90,6 +91,19 @@ namespace EFCoreRelationship.Controllers
         {
             Response.Cookies.Delete("jwt");
             return Ok();
+        }
+
+        [HttpGet("test-cookie")]
+        public IActionResult TestCookie()
+        {
+            if (Request.Cookies.TryGetValue("jwt", out var jwt))
+            {
+                return Ok(new { message = "Cookie received", jwt });
+            }
+            else
+            {
+                return BadRequest(new { message = "Cookie not received" });
+            }
         }
     }
 }

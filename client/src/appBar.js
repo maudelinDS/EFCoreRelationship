@@ -21,11 +21,11 @@ export default function ButtonAppBar({ showSection , userName, isLoggedIn}) {
 
     const hideSection = location.pathname === '/login';
 
-    useEffect(() => {
-        getStudents();
+  /*  useEffect(() => {
+        getConnexion();
     }, []);
 
-    function getStudents() {
+    function getConnexion() {
         const url = Constants.CONNECTE;
 
         fetch(url, {
@@ -34,7 +34,6 @@ export default function ButtonAppBar({ showSection , userName, isLoggedIn}) {
         })
             .then(response => response.json())
             .then(studentsFromServer => {
-                console.log(studentsFromServer);
                 const user = studentsFromServer.userFirstName; // Assuming the response contains the name field
             })
             .catch((error) => {
@@ -42,7 +41,7 @@ export default function ButtonAppBar({ showSection , userName, isLoggedIn}) {
                 alert(error);
             });
     }
-    function handleLogout(setIsLoggedIn) {
+*/    function handleLogout(setIsLoggedIn) {
         const url = Constants.LOGOUT;
 
         fetch(url, {
