@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Button from '@mui/material/Button';
-import { Container, TextField } from '@mui/material';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Checkbox from '@mui/material/Checkbox';
-import imageURL from '../images/JOBK_Img_HeaderMobile_Home.png';
-import NavBar from '../appBar';
-import Constants from '../utilities/Constants';
+import React, { useEffect } from "react";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Button from "@mui/material/Button";
+import { Container, TextField } from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Checkbox from "@mui/material/Checkbox";
+import imageURL from "../images/JOBK_Img_HeaderMobile_Home.png";
+import NavBar from "../appBar";
+import Constants from "../utilities/Constants";
 import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
 import Cookies from 'js-cookie';
+
 
 export default function SignIn() {
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userName, setUserName] = useState("");
 
-    const handleSubmit = async event => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
@@ -39,8 +41,8 @@ export default function SignIn() {
 
                 if (jwt) {
                     Cookies.set('jwt', jwt);
-                    setIsLoggedIn(true);
-                    navigate('/student');
+
+                    navigate("/student");
                 }
             } else {
                 throw new Error('Échec de la connexion');
@@ -50,39 +52,28 @@ export default function SignIn() {
         }
     };
 
-    useEffect(() => {
-        const jwt = Cookies.get('jwt');
-        setIsLoggedIn(!!jwt);
-    }, []);
 
     const containerStyles = {
-        height: '100vh',
+        height: "100vh",
         backgroundImage: `url(${imageURL})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
     };
-
     return (
         <Box sx={containerStyles}>
-            <NavBar />
-            <Container component="main" maxWidth="sm" sx={{ background: '#fff' }}>
-                <Typography component="h1" variant="h5" sx={{ mt: 5 }}>
+            <NavBar onLogin={setUserName} />
+            <Container component="main" maxWidth="sm" sx={{background: '#fff',}}>
+                <Typography component="h1" variant="h5" sx={{mt: 5}}>
                     Se connecter
                 </Typography>
-                <Box
-                    component="form"
-                    onSubmit={handleSubmit}
-                    noValidate
-                    sx={{
-                        mt: 4,
-                        maxWidth: '100%',
-                        maxHeight: '100%',
-                    }}
-                >
+                <Box component="form" onSubmit={handleSubmit} noValidate sx={{
+                    mt: 4,
+                    maxWidth: '100%', maxHeight: '100%',
+                }}>
                     <TextField
                         margin="normal"
                         required
@@ -99,7 +90,7 @@ export default function SignIn() {
                         fullWidth
                         name="UserPassword"
                         label="Mot de passe"
-                        type="password"
+                        type="UserPassword"
                         id="UserPassword"
                         autoComplete="current-password"
                     />
@@ -108,12 +99,19 @@ export default function SignIn() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 5, background: '#8FC62E' }}
+                        sx={{mt: 3, mb: 5, background: '#8FC62E'}}
                     >
                         Se connecter
                     </Button>
+
                 </Box>
             </Container>
         </Box>
     );
 }
+
+
+
+
+
+

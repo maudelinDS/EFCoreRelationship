@@ -37,7 +37,7 @@ const Section = () => {
 
                     justifyContent: "center",
                 }}>
-                    <Link to="/home">Home</Link>
+                    <Link to="/§">Home</Link>
                 </ListItem>
                 <ListItem style={{
                     display: 'flex',
