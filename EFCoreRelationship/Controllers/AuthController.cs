@@ -38,6 +38,32 @@ namespace EFCoreRelationship.Controllers
             return Created("succes", _repository.Create(user));
         }
 
+        //[HttpPost("login")]
+        //public IActionResult Login(LoginDto dto)
+        //{
+        //    var user = _repository.GetByEmail(dto.UserEmail);
+
+        //    if (user == null)
+        //        return BadRequest(new { message = "Invalid" });
+
+        //    if (string.IsNullOrEmpty(dto.UserPassword) || string.IsNullOrEmpty(user.UserPassword))
+        //        return BadRequest(new { message = "Invalid" });
+
+        //    if (!BCrypt.Net.BCrypt.Verify(dto.UserPassword, user.UserPassword))
+        //        return BadRequest(new { message = "Invalid" });
+        //    //encode jwt
+        //    var jwt = _jwtService.Generate(user.UserId);
+
+        //    Response.Headers.Add("Set-Cookie", "jwt=" + jwt + "; path=/; HttpOnly");
+
+
+        //    return Ok(new
+        //    {
+        //        message = "succes"
+
+        //    });
+        //}
+
         [HttpPost("login")]
         public IActionResult Login(LoginDto dto)
         {
@@ -51,20 +77,22 @@ namespace EFCoreRelationship.Controllers
 
             if (!BCrypt.Net.BCrypt.Verify(dto.UserPassword, user.UserPassword))
                 return BadRequest(new { message = "Invalid" });
-            //encode jwt
+
             var jwt = _jwtService.Generate(user.UserId);
 
             Response.Cookies.Append("jwt", jwt, new CookieOptions
             {
+                Path = "/",
                 HttpOnly = true
             });
 
             return Ok(new
             {
-                message = "succes"
-                
+                message = "success",
+                jwt = jwt
             });
         }
+
         //decode jwt
 
         [HttpGet("user")]

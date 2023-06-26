@@ -7,61 +7,54 @@ import Button from '@mui/material/Button';
 import { useLocation } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import Cookies from 'js-cookie';
 
 
 import {ReactComponent as Logo} from '../src/images/logo-white.svg';
 import Section from "./Sections";
+import {useEffect, useState} from "react";
 import Constants from "./utilities/Constants";
-import {useEffect} from "react";
 
 
 
-export default function ButtonAppBar({ showSection , userName, isLoggedIn}) {
+
+export default function ButtonAppBar({ }) {
     const location = useLocation();
 
-    const hideSection = location.pathname === '/login';
+    const [userName, setUserName] = useState('');
 
-  /*  useEffect(() => {
-        getConnexion();
-    }, []);
+    useEffect(() => {
+        // Effectuer une requête GET vers votre point de terminaison "user"
 
-    function getConnexion() {
         const url = Constants.CONNECTE;
 
         fetch(url, {
             method: 'GET',
-            mode: 'cors'
-        })
-            .then(response => response.json())
-            .then(studentsFromServer => {
-                const user = studentsFromServer.userFirstName; // Assuming the response contains the name field
-            })
-            .catch((error) => {
-                console.log(error);
-                alert(error);
-            });
-    }
-*/    function handleLogout(setIsLoggedIn) {
-        const url = Constants.LOGOUT;
-
-        fetch(url, {
-            method: 'POST',
-            credentials: 'include' // Inclure les cookies dans la requête
+            credentials: 'include', // Inclure les cookies dans la requête
         })
             .then(response => {
                 if (response.ok) {
-                    setIsLoggedIn(false);
-                    window.location.href = '/login';
+                    return response.json();
                 } else {
-                    // La déconnexion a échoué, affichez un message d'erreur ou effectuez d'autres actions
-                    console.log('Failed to logout');
+                    throw new Error('Échec de la récupération de l\'utilisateur connecté');
                 }
             })
+            .then(data => {
+                // Extraire le nom d'utilisateur de la réponse et mettre à jour l'état
+                setUserName(data.userName);
+            })
             .catch(error => {
-                console.log(error);
+                console.error(error);
             });
+    }, []);
+    function handleLogout() {
+        Cookies.remove('jwt');
+        Cookies.remove('userName');
+        window.location.reload(); // Rafraîchit la page pour mettre à jour l'état de connexion
+        // Ou utilisez la redirection vers la page de connexion si vous préférez
+        // window.location.href = '/login';
     }
-
+    const hideSection = location.pathname === '/login';
 
     return (
         <Box>
@@ -70,17 +63,14 @@ export default function ButtonAppBar({ showSection , userName, isLoggedIn}) {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         <Logo />
                     </Typography>
-                    {isLoggedIn ? (
+
                         <>
                             <IconButton edge="end" color="inherit" onClick={handleLogout}>
                                 <ExitToAppIcon />
                                 <Typography variant="body1" sx={{ ml: 1 }}>Déconnexion</Typography>
                             </IconButton>
-                            <Typography variant="body1" sx={{ ml: 1 }}>{`Bonjour, ${userName}`}</Typography>
                         </>
-                    ) : (
-                        <Typography variant="body1" sx={{ ml: 1 }}>Non connecté</Typography>
-                    )}
+
                 </Toolbar>
                 {!hideSection && <Section />}
             </AppBar>

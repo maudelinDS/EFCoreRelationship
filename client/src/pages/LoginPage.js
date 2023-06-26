@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Button from "@mui/material/Button";
-import {Container, TextField} from "@mui/material";
+import { Container, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
@@ -15,56 +15,12 @@ import Cookies from 'js-cookie';
 export default function SignIn() {
     const navigate = useNavigate();
     const [userName, setUserName] = useState("");
-/*
-    const testCookie = async () => {
-        try {
-            const url = Constants.LOGIN;
-            const response = await fetch(url, {
-                method: "POST",
-                credentials: "include",
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log("Cookie received:", data.jwt);
-            } else {
-                console.error("Cookie not received");
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    };*/
-
-
-
-    useEffect(() => {
-        const checkUser = async () => {
-            try {
-                const url = Constants.CONNECTE; // Remplacez par l'URL correspondante pour vérifier l'utilisateur
-                const response = await fetch(url, {
-                    method: "GET",
-                    credentials: "include",
-                });
-
-                if (response.ok) {
-                    navigate("/student"); // Rediriger vers la page appropriée si l'utilisateur est déjà connecté
-                }
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        checkUser();
-    }, []);
-
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
         try {
             const url = Constants.LOGIN;
-            console.log(url)
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -73,15 +29,20 @@ export default function SignIn() {
                 body: JSON.stringify({
                     UserEmail: data.get('UserEmail'),
                     UserPassword: data.get('UserPassword'),
-
                 }),
+                credentials: 'include',
             });
-            if (response.ok) {
-                const cookieHeader = response.headers.get('Set-Cookie');
-               // const cookie = cookieHeader.split(';')[0].split('=')[1];
-              //  Cookies.set('jwt', cookie); // Sauvegarder le cookie dans 'jwt'
 
-                console.log(cookieHeader)
+            if (response.ok) {
+                const responseData = await response.json();
+                const jwt = responseData.jwt;
+
+                console.log(jwt)
+                console.log(responseData); // Affiche la réponse dans la console
+                if (jwt) {
+                    Cookies.set('jwt', jwt);
+                }
+
                 navigate("/student");
             } else {
                 throw new Error('Échec de la connexion');
@@ -89,12 +50,15 @@ export default function SignIn() {
         } catch (error) {
             console.error(error);
         }
-
-
     };
 
-
-
+    //check si le cookie est présent
+    useEffect(() => {
+        // Check if the 'jwt' cookie is present
+        if (Cookies.get('jwt')) {
+            navigate("/student");
+        }
+    }, []);
     const containerStyles = {
         height: "100vh",
         backgroundImage: `url(${imageURL})`,

@@ -1,12 +1,15 @@
 using EFCoreRelationship.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using System;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using EFCoreRelationship.Helpers;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.CookiePolicy;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +40,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseHttpsRedirection();
+
+app.UseRouting();
+
 app.UseCors(options =>
 {
     options.WithOrigins("http://localhost:3000", "http://localhost:7007")
@@ -46,7 +53,12 @@ app.UseCors(options =>
         .WithExposedHeaders("Set-Cookie");
 });
 
-app.UseHttpsRedirection();
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+    MinimumSameSitePolicy = SameSiteMode.None,
+    HttpOnly = HttpOnlyPolicy.None,
+    Secure = CookieSecurePolicy.Always
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
