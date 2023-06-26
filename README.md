@@ -9,6 +9,7 @@ fonctionnalités distinctes pour les formateurs et les apprentis, avec des rôle
 - Connexion des utilisateurs avec leur adresse e-mail et leur mot de passe
 - Affichage de différentes pages selon le rôle de l'utilisateur (étudiant, projet, emploi, statistiques)
 - Gestion des projets, des emplois et des statistiques
+- Avoir un suivi des utilisateurs
 
 ## Installation
 
@@ -18,9 +19,26 @@ fonctionnalités distinctes pour les formateurs et les apprentis, avec des rôle
 
 `` npm install``
 
-4. Exécutez l'application avec la commande suivante :
+5. Exécutez l'application avec la commande suivante :
 
 `` npm start``
+
+6. Installer material UI 
+
+``npm install @mui/material @emotion/react @emotion/styled
+``
+
+7. Installer material UI styled-components
+
+``npm install @mui/material @mui/styled-engine-sc styled-components
+``
+
+7. Installer package icons
+
+``
+npm install @mui/icons-materials
+``
+
 
 ## Getting Started with Create React App
 

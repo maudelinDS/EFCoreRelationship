@@ -24,34 +24,41 @@ export default function ButtonAppBar() {
     const [userName, setUserName] = useState('');
     const navigate = useNavigate();
 
-    useEffect(() => {
+    const fetchUserData = () => {
         // Effectuer une requête GET vers votre point de terminaison "user"
 
-        const url = Constants.CONNECTE;
 
-        fetch(url, {
-            method: 'GET',
-            credentials: 'include', // Inclure les cookies dans la requête
-        })
-            .then(response => {
-                if (response.ok) {
-                    console.log(response)
-                    return response.json();
-                } else {
-                    throw new Error('Échec de la récupération de l\'utilisateur connecté');
-                }
-            })
-            .then(data => {
-                // Extraire le nom d'utilisateur de la réponse et mettre à jour l'état
-                const userName = data.userFirstName;
-                console.log(userName)
-                setUserName(userName);
+            const url = Constants.CONNECTE;
 
+            fetch(url, {
+                method: 'GET',
+                credentials: 'include', // Inclure les cookies dans la requête
             })
-            .catch(error => {
-                console.error(error);
-            });
-    }, []);
+                .then(response => {
+                    if (response.ok) {
+                        console.log(response)
+                        return response.json();
+                    } else {
+                        throw new Error('Échec de la récupération de l\'utilisateur connecté');
+                    }
+                })
+                .then(data => {
+                    // Extraire le nom d'utilisateur de la réponse et mettre à jour l'état
+                    const userName = data.userFirstName;
+                    console.log(userName)
+                    setUserName(userName);
+
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+    };
+
+        useEffect(() => {
+            fetchUserData();
+
+        }, []);
     function handleLogout() {
         const url = Constants.LOGOUT;
 
@@ -62,7 +69,8 @@ export default function ButtonAppBar() {
             .then(response => {
                 if (response.ok) {
                     Cookies.remove('jwt');
-                    Cookies.remove('userName');
+                    fetchUserData();
+                    window.location.reload(); // Rafraîchit la page pour mettre à jour l'état de connexion
                     // Ou utilisez la redirection vers la page de connexion si vous préférez
                     navigate('/login');
 
