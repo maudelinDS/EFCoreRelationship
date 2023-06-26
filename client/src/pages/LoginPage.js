@@ -41,9 +41,10 @@ export default function SignIn() {
 
                 if (jwt) {
                     Cookies.set('jwt', jwt);
+                    navigate("/student");
+
                 }
 
-                navigate("/student");
             } else {
                 throw new Error('Échec de la connexion');
             }
@@ -56,10 +57,19 @@ export default function SignIn() {
         const jwt = Cookies.get('jwt');
         if (jwt) {
             setIsLoggedIn(true);
+
         } else {
             setIsLoggedIn(false);
         }
     }, []);
+
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate("/student"); // Effectuer la redirection ici une fois que l'état isLoggedIn a été mis à jour
+        }
+    }, [isLoggedIn, navigate]);
+
     const containerStyles = {
         height: "100vh",
         backgroundImage: `url(${imageURL})`,
@@ -70,11 +80,6 @@ export default function SignIn() {
         justifyContent: "center",
         alignItems: "center",
     };
-
-
-    if (isLoggedIn) {
-        return null; // Render nothing if user is already logged in
-    }
 
     return (
         <Box sx={containerStyles}>
