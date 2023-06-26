@@ -16,12 +16,11 @@ import {useEffect, useState} from "react";
 import Constants from "./utilities/Constants";
 
 
-
-
 export default function ButtonAppBar({ }) {
     const location = useLocation();
 
     const [userName, setUserName] = useState('');
+    const hideSection = location.pathname === '/login';
 
     useEffect(() => {
         // Effectuer une requête GET vers votre point de terminaison "user"
@@ -34,6 +33,7 @@ export default function ButtonAppBar({ }) {
         })
             .then(response => {
                 if (response.ok) {
+                    console.log(response)
                     return response.json();
                 } else {
                     throw new Error('Échec de la récupération de l\'utilisateur connecté');
@@ -41,20 +41,38 @@ export default function ButtonAppBar({ }) {
             })
             .then(data => {
                 // Extraire le nom d'utilisateur de la réponse et mettre à jour l'état
-                setUserName(data.userName);
+                const userName = data.userFirstName;
+                console.log(userName)
+                setUserName(userName);
+
             })
             .catch(error => {
                 console.error(error);
             });
     }, []);
+
     function handleLogout() {
-        Cookies.remove('jwt');
-        Cookies.remove('userName');
-        window.location.reload(); // Rafraîchit la page pour mettre à jour l'état de connexion
-        // Ou utilisez la redirection vers la page de connexion si vous préférez
-        // window.location.href = '/login';
+        const url = Constants.LOGOUT;
+
+        fetch(url, {
+            method: 'POST',
+            credentials: 'include',
+        })
+            .then(response => {
+                if (response.ok) {
+                    Cookies.remove('jwt');
+                    Cookies.remove('userName');
+                    window.location.reload(); // Rafraîchit la page pour mettre à jour l'état de connexion
+                    // Ou utilisez la redirection vers la page de connexion si vous préférez
+                    // window.location.href = '/login';
+                } else {
+                    console.log('Échec de la déconnexion');
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }
-    const hideSection = location.pathname === '/login';
 
     return (
         <Box>
@@ -64,12 +82,13 @@ export default function ButtonAppBar({ }) {
                         <Logo />
                     </Typography>
 
-                        <>
-                            <IconButton edge="end" color="inherit" onClick={handleLogout}>
-                                <ExitToAppIcon />
-                                <Typography variant="body1" sx={{ ml: 1 }}>Déconnexion</Typography>
-                            </IconButton>
-                        </>
+                    <>
+                        <IconButton edge="end" color="inherit" onClick={handleLogout}>
+                            <ExitToAppIcon />
+                            <Typography variant="body1" sx={{ ml: 1 }}>Déconnexion</Typography>
+                        </IconButton>
+                        <Typography variant="body1" sx={{ ml: 1 }}>{`${userName}`}</Typography>
+                    </>
 
                 </Toolbar>
                 {!hideSection && <Section />}

@@ -59,6 +59,29 @@ export default function SignIn() {
             navigate("/student");
         }
     }, []);
+
+
+    useEffect(() => {
+        // Check if the user is logged in
+        const jwt = Cookies.get('jwt');
+        if (!jwt) {
+            navigate("/login");
+        }
+    }, []);
+
+
+    export function LoginWrapper({ children }) {
+        const navigate = useNavigate();
+
+        useEffect(() => {
+            const jwt = Cookies.get('jwt');
+            if (!jwt) {
+                navigate("/login");
+            }
+        }, []);
+
+        return children;
+    }
     const containerStyles = {
         height: "100vh",
         backgroundImage: `url(${imageURL})`,
@@ -69,8 +92,6 @@ export default function SignIn() {
         justifyContent: "center",
         alignItems: "center",
     };
-
-
     return (
         <Box sx={containerStyles}>
             <NavBar onLogin={setUserName} />
@@ -117,3 +138,9 @@ export default function SignIn() {
         </Box>
     );
 }
+
+
+
+
+
+
