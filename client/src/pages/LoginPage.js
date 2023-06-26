@@ -39,8 +39,6 @@ export default function SignIn() {
                 const responseData = await response.json();
                 const jwt = responseData.jwt;
 
-                console.log(jwt)
-                console.log(responseData); // Affiche la réponse dans la console
                 if (jwt) {
                     Cookies.set('jwt', jwt);
                 }
@@ -58,18 +56,8 @@ export default function SignIn() {
         const jwt = Cookies.get('jwt');
         if (jwt) {
             setIsLoggedIn(true);
-            navigate('/student');
         } else {
             setIsLoggedIn(false);
-        }
-    }, [navigate]);
-
-
-    useEffect(() => {
-        // Check if the user is logged in
-        const jwt = Cookies.get('jwt');
-        if (!jwt) {
-            navigate("/login");
         }
     }, []);
     const containerStyles = {
