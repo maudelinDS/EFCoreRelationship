@@ -11,7 +11,7 @@ const Home = () => {
         <NavBar/>
         <Section/>
 
-
+<h1>DKFSDLKFKSLFDKKL</h1>
 
 
 

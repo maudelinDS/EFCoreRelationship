@@ -3,7 +3,6 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import { useLocation } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -14,14 +13,16 @@ import {ReactComponent as Logo} from '../src/images/logo-white.svg';
 import Section from "./Sections";
 import {useEffect, useState} from "react";
 import Constants from "./utilities/Constants";
+import { useNavigate } from 'react-router-dom';
 
 
 
 
-export default function ButtonAppBar({ }) {
+export default function ButtonAppBar() {
     const location = useLocation();
 
     const [userName, setUserName] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Effectuer une requête GET vers votre point de terminaison "user"
@@ -62,8 +63,9 @@ export default function ButtonAppBar({ }) {
                 if (response.ok) {
                     Cookies.remove('jwt');
                     Cookies.remove('userName');
-                    window.location.reload(); // Rafraîchit la page pour mettre à jour l'état de connexion
                     // Ou utilisez la redirection vers la page de connexion si vous préférez
+                    navigate('/login');
+
                     // window.location.href = '/login';
                 } else {
                     console.log('Échec de la déconnexion');

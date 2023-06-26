@@ -31,12 +31,13 @@ const Section = () => {
                     width: "100%",
                 }}
             >
+
                 <ListItem style={{
                     display: 'flex',
 
                     justifyContent: "center",
                 }}>
-                    <Link to="/">Home</Link>
+                    <Link to="/home">Home</Link>
                 </ListItem>
                 <ListItem style={{
                     display: 'flex',
