@@ -1,7 +1,26 @@
 # Application de Suivi des Apprentis
 
 Cette application permet de gérer et de suivre les projets et les compétences des apprentis. Elle offre des
-fonctionnalités distinctes pour les formateurs et les apprentis, avec des rôles et des droits d'accès spécifiques.
+fonctionnalités distinctes pour les formateurs et les apprentis, avec des rôles et des droits d'accès spécifiques.Dévolloper avec React
+
+
+## Fonctionnalités
+
+- Connexion des utilisateurs avec leur adresse e-mail et leur mot de passe
+- Affichage de différentes pages selon le rôle de l'utilisateur (étudiant, projet, emploi, statistiques)
+- Gestion des projets, des emplois et des statistiques
+
+## Installation
+
+1. Clonez ce dépôt sur votre machine locale.
+2. Assurez-vous d'avoir Node.js installé sur votre machine.
+3. Exécutez la commande suivante pour installer les dépendances :
+
+`` npm install``
+
+4. Exécutez l'application avec la commande suivante :
+
+`` npm start``
 
 ## Getting Started with Create React App
 

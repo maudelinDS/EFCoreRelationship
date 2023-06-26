@@ -15,6 +15,8 @@ import Cookies from 'js-cookie';
 export default function SignIn() {
     const navigate = useNavigate();
     const [userName, setUserName] = useState("");
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -52,13 +54,15 @@ export default function SignIn() {
         }
     };
 
-    //check si le cookie est présent
     useEffect(() => {
-        // Check if the 'jwt' cookie is present
-        if (Cookies.get('jwt')) {
-            navigate("/student");
+        const jwt = Cookies.get('jwt');
+        if (jwt) {
+            setIsLoggedIn(true);
+            navigate('/student');
+        } else {
+            setIsLoggedIn(false);
         }
-    }, []);
+    }, [navigate]);
 
 
     useEffect(() => {
@@ -68,20 +72,6 @@ export default function SignIn() {
             navigate("/login");
         }
     }, []);
-
-
-    export function LoginWrapper({ children }) {
-        const navigate = useNavigate();
-
-        useEffect(() => {
-            const jwt = Cookies.get('jwt');
-            if (!jwt) {
-                navigate("/login");
-            }
-        }, []);
-
-        return children;
-    }
     const containerStyles = {
         height: "100vh",
         backgroundImage: `url(${imageURL})`,
@@ -92,6 +82,12 @@ export default function SignIn() {
         justifyContent: "center",
         alignItems: "center",
     };
+
+
+    if (isLoggedIn) {
+        return null; // Render nothing if user is already logged in
+    }
+
     return (
         <Box sx={containerStyles}>
             <NavBar onLogin={setUserName} />

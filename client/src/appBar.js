@@ -16,11 +16,12 @@ import {useEffect, useState} from "react";
 import Constants from "./utilities/Constants";
 
 
+
+
 export default function ButtonAppBar({ }) {
     const location = useLocation();
 
     const [userName, setUserName] = useState('');
-    const hideSection = location.pathname === '/login';
 
     useEffect(() => {
         // Effectuer une requête GET vers votre point de terminaison "user"
@@ -50,7 +51,6 @@ export default function ButtonAppBar({ }) {
                 console.error(error);
             });
     }, []);
-
     function handleLogout() {
         const url = Constants.LOGOUT;
 
@@ -73,6 +73,7 @@ export default function ButtonAppBar({ }) {
                 console.error(error);
             });
     }
+    const hideSection = location.pathname === '/login';
 
     return (
         <Box>
@@ -82,13 +83,14 @@ export default function ButtonAppBar({ }) {
                         <Logo />
                     </Typography>
 
-                    <>
-                        <IconButton edge="end" color="inherit" onClick={handleLogout}>
-                            <ExitToAppIcon />
-                            <Typography variant="body1" sx={{ ml: 1 }}>Déconnexion</Typography>
-                        </IconButton>
-                        <Typography variant="body1" sx={{ ml: 1 }}>{`${userName}`}</Typography>
-                    </>
+                        <>
+                            <IconButton edge="end" color="inherit" onClick={handleLogout}>
+                                <ExitToAppIcon />
+                                <Typography variant="body1" sx={{ ml: 1 }}>Déconnexion</Typography>
+                            </IconButton>
+                            <Typography variant="body1" sx={{ ml: 1 }}>{`${userName}`}</Typography>
+
+                        </>
 
                 </Toolbar>
                 {!hideSection && <Section />}

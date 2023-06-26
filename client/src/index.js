@@ -9,7 +9,6 @@ import Project from "./pages/ProjectPage";
 import JobPage from "./pages/JobPage";
 import StatPage from "./pages/StatPage";
 import LoginPage from "./pages/LoginPage";
-import LoginWrapper from "./pages/LoginPage";
 import { render } from "react-dom";
 
 
@@ -19,27 +18,14 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<LoginPage />} />
-                    <Route
-                        path="/login"
-                        element={<LoginWrapper><LoginPage /></LoginWrapper>}
-                    />
-                    <Route
-                        path="/student"
-                        element={<LoginWrapper><Student /></LoginWrapper>}
-                    />
-                    <Route
-                        path="/projet"
-                        element={<LoginWrapper><Project /></LoginWrapper>}
-                    />
-                    <Route
-                        path="/job"
-                        element={<LoginWrapper><JobPage /></LoginWrapper>}
-                    />
-                    <Route
-                        path="/stat"
-                        element={<LoginWrapper><StatPage /></LoginWrapper>}
-                    />
-                    {/* ...other routes */}
+                    <Route path="student" element={<Student />} />
+                    <Route path="projet" element={<Project />} />
+                    <Route path="job" element={<JobPage />} />
+                    <Route path="stat" element={<StatPage />} />
+{/*
+                    <Route path="Home" element={<Home />} />
+*/}
+
                 </Route>
             </Routes>
         </BrowserRouter>
