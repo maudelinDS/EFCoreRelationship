@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import { Routes, Route, Navigate, useNavigate, BrowserRouter as Router } from 'react-router-dom';
 import Layout from "./pages/Layout";
 import Student from "./pages/StudentPage";
 import Project from "./pages/ProjectPage";
@@ -9,24 +9,45 @@ import Login from "./pages/LoginPage";
 import Home from "./pages/HomePage";
 import Cookies from 'js-cookie';
 
-const isLoggedIn = () => {
-    const jwt = Cookies.get('jwt');
-    return !!jwt;
-};
 
 export default function App() {
     const navigate = useNavigate();
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+    const handleLogin = () => {
+        setIsLoggedIn(true);
+    };
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        Cookies.remove('jwt');
+    };
+    console.log(isLoggedIn)
 
     return (
         <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/student" element={<Student />} />
-            <Route path="/projet" element={<Project />} />
-            <Route path="/job" element={<Job />} />
-            <Route path="/stat" element={<Stat />} />
+            <Route path="/login" element={<Login onLogin={handleLogin} />} />
+            <Route
+                path="/home"
+                element={isLoggedIn ? <Home /> : <Navigate to="/login" replace />}
+            />
+            <Route
+                path="/student"
+                element={isLoggedIn ? <Student /> : <Navigate to="/login" replace />}
+            />
+            <Route
+                path="/projet"
+                element={isLoggedIn ? <Project /> : <Navigate to="/login" replace />}
+            />
+            <Route
+                path="/job"
+                element={isLoggedIn ? <Job /> : <Navigate to="/login" replace />}
+            />
+            <Route
+                path="/stat"
+                element={isLoggedIn ? <Stat /> : <Navigate to="/login" replace />}
+            />
             <Route path="/*" element={<Navigate to="/login" replace />} />
         </Routes>
     );

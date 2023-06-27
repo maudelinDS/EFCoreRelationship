@@ -13,7 +13,7 @@ import { useState } from "react";
 import Cookies from 'js-cookie';
 
 
-export default function SignIn() {
+export default function SignIn(props) {
     const navigate = useNavigate();
     const [userName, setUserName] = useState("");
 
@@ -41,8 +41,7 @@ export default function SignIn() {
 
                 if (jwt) {
                     Cookies.set('jwt', jwt);
-
-                    navigate("/student");
+                    props.onLogin();                    navigate("/student");
                 }
             } else {
                 throw new Error('Échec de la connexion');
