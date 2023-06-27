@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Constants from "../utilities/Constants";
+import {TextField} from "@mui/material";
 
 export default function JobUpdateForm(props) {
 
@@ -49,29 +50,35 @@ export default function JobUpdateForm(props) {
 
     };
     return (
-        <form action="" className="w-100 px-5">
+        <form action="" className="w-100 px-5"
+              style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', width: '100%'}}>
+
             <h1 className="mt-5">Update Job "{props.job.jobName}".</h1>
-            <div className="mt-5">
-                <label htmlFor="" className="h3 form-label">Job Name</label>
-                <input type="text" value={formData.jobName} name="jobName" className="form-control"
-                       onChange={handleChange}/>
-            </div>
 
-            <div className="mt-4">
-                <label htmlFor="" className="h3 form-label">Job Description</label>
-                <input type="text" value={formData.jobDescription} name="jobDescription" className="form-control"
-                       onChange={handleChange}/>
-            </div>
+
+            <TextField type="text" value={formData.jobName} id="jobName" label="jobName"
+                       name="jobName" variant="outlined" onChange={handleChange} style={{width: '60%'}}/>
 
 
 
+            <TextField type="text" value={formData.jobDescription} id="jobDescription" label="jobDescription"
+                       name="jobDescription" variant="outlined" onChange={handleChange} style={{width: '60%'}}/>
 
-            <button onClick={handleSubmit} className="btn btn-dark btn-lg w-100 mt-5">
+            <div style={{display: 'flex', flexDirection: 'row', gap: '50px'}}>
+
+            <button onClick={handleSubmit} className="btn btn-dark btn-lg w-100 mt-5"
+                    style={{marginBottom: '10px', marginTop: '20px', background: '#8FC62E', width: '100px'}}
+
+            >
                 Submit
             </button>
-            <button onClick={() => props.onJobUpdated(null)} className="btn secondary btn-lg w-100 mt-3">
+            <button onClick={() => props.onJobUpdated(null)} className="btn secondary btn-lg w-100 mt-3"
+                    style={{marginBottom: '10px', marginTop: '20px', width: '100px'}}
+
+            >
                 Cancel
             </button>
+            </div>
         </form>
     );
 }
