@@ -39,9 +39,14 @@ namespace EFCoreRelationship.Data.Migrations
                     b.Property<int?>("DomaineId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("CompetenceId");
 
                     b.HasIndex("DomaineId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Competences");
                 });
@@ -311,6 +316,10 @@ namespace EFCoreRelationship.Data.Migrations
                         .WithMany()
                         .HasForeignKey("DomaineId");
 
+                    b.HasOne("EFCoreRelationship.User", null)
+                        .WithMany("Competences")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Domaines");
                 });
 
@@ -437,6 +446,8 @@ namespace EFCoreRelationship.Data.Migrations
 
             modelBuilder.Entity("EFCoreRelationship.User", b =>
                 {
+                    b.Navigation("Competences");
+
                     b.Navigation("UserProjets");
                 });
 #pragma warning restore 612, 618

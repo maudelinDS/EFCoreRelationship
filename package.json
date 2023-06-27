@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@mui/styles": "^5.13.2"
+    "@mui/styles": "^5.13.2",
+    "jsonwebtoken": "^9.0.0"
   }
 }

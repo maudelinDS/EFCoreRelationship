@@ -68,7 +68,7 @@ export default function AppCrudJob() {
         alignItems: "center",
         backgroundColor: "#f2f2f2",
         width: "100%",
-        overflowX: "hidden",
+        overflowY: "hidden",
     }
 
     function renderJobsTable() {
@@ -78,7 +78,7 @@ export default function AppCrudJob() {
                 <NavBar showSection={false}/>
 
 
-                <TableContainer style={{width: '100%', marginTop: '200px', overflow: 'hidden'}}>
+                <TableContainer style={{width: '100%', marginTop: '150px', overflow: 'hidden', overflowX: 'hidden'}}>
                     <Table style={{
                         display: "flex",
                         flexDirection: "column",
@@ -87,52 +87,124 @@ export default function AppCrudJob() {
                         alignItems: 'center',
                         tableLayout: 'fixed',
                     }}>
-                        <TableHead style={{width: '100%'}}>
+                        <TableHead style={{width: '98%'}}>
                             <TableRow style={{
                                 display: 'flex',
                                 width: '100%',
-                                flexDirection: 'row',
                                 justifyContent: 'space-between',
-                                alignItems: 'center',
-                                padding: '30px'
+                                textAlign: 'center'
                             }}>
-                                <TableCell style={{textAlign: 'center', height: '50px'}}>img</TableCell>
+                                <TableCell style={{
+                                    height: '80px',
+                                    width: '90px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>img</TableCell>
 
-                                <TableCell style={{textAlign: 'center', height: '80px'}}>Id</TableCell>
-                                <TableCell style={{textAlign: 'center', height: '80px'}}>Name</TableCell>
-                                <TableCell style={{textAlign: 'center', height: '80px'}}>Description</TableCell>
-                                <TableCell style={{textAlign: 'center', height: '80px'}}></TableCell>
-                                <TableCell style={{textAlign: 'center', height: '80px'}}></TableCell>
+                                <TableCell style={{
+                                    height: '80px',
+                                    width: '90px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>Id</TableCell>
+                                <TableCell style={{
+                                    height: '80px',
+                                    width: '90px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>Name</TableCell>
+                                <TableCell style={{
+                                    height: '80px',
+                                    width: '90px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>Description</TableCell>
+                                <TableCell style={{
+                                    height: '80px',
+                                    width: '90px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}></TableCell>
+                                <TableCell style={{
+                                    height: '80px',
+                                    width: '90px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}></TableCell>
 
                             </TableRow>
                         </TableHead>
 
-                        <TableBody style={{overflow: "scroll", height: "600px", width: '100%'}}>
+                        <TableBody style={{overflow: "scroll", height: "900px", width: '100%', textAlign: 'center'}}>
                             {jobs.map((job) => (
                                 <TableRow key={job.jobId} style={{
                                     display: 'flex',
-                                    textAlign: 'center',
+                                    flexDirection: 'row',
                                     justifyContent: 'space-between',
-                                    alignItems: 'center'
+                                    alignItems: 'center',
+                                    padding: '16px'
                                 }}>
-                                    <TableCell>
+                                    <TableCell style={{
+                                        width: '90px',
+                                        height: '30px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}>
                                         <img src={UserIcon} alt="User Icon" width="24" height="24"/>
                                     </TableCell>
-                                    <TableCell style={{width: '50px', height: '50px'}}>{job.jobId}</TableCell>
-                                    <TableCell style={{width: '50px', height: '50px'}}>{job.jobName}
+                                    <TableCell style={{
+                                        width: '90px',
+                                        height: '30px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}>{job.jobId}</TableCell>
+                                    <TableCell style={{
+                                        width: '90px',
+                                        height: '30px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}>{job.jobName}
                                     </TableCell>
-                                    <TableCell style={{width: '50px', height: '50px'}}>{job.jobDescription}</TableCell>
+                                    <TableCell style={{
+                                        width: '90px',
+                                        height: '30px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}>{job.jobDescription}</TableCell>
 
-                                    <TableCell style={{height: '50px', display: 'flex', gap: '10px'}}>
+                                    <TableCell style={{
+                                        height: '30px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}>
                                         <Button
                                             variant="contained"
                                             color="primary"
                                             onClick={() => setJobCurrentlyBeingUpdated(job)}
-                                            style={{background: '#141E66', padding: '3px', width: '50px'}}
+                                            style={{background: '#141E66'}}
                                             size='small'
                                         >
                                             Update
                                         </Button>
+
+                                    </TableCell>
+                                    <TableCell style={{
+                                        height: '30px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}>
                                         <Button
                                             variant="contained"
                                             color="primary"
@@ -151,6 +223,7 @@ export default function AppCrudJob() {
                                         >
                                             Delete
                                         </Button>
+
                                     </TableCell>
                                 </TableRow>
                             ))}

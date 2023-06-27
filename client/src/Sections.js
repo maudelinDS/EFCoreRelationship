@@ -44,7 +44,14 @@ const Section = () => {
 
                     justifyContent: "center",
                 }}>
-                    <Link to="/student">Apprentis</Link>
+                    <Link to="/student">Utilisateurs</Link>
+                </ListItem>
+                <ListItem style={{
+                    display: 'flex',
+
+                    justifyContent: "center",
+                }}>
+                    <Link to="/teacher">Formateurs</Link>
                 </ListItem>
                 <ListItem style={{
                     display: 'flex',

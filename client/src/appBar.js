@@ -20,6 +20,7 @@ export default function ButtonAppBar() {
     const location = useLocation();
 
     const [userName, setUserName] = useState('');
+    const [role, setUserRole] = useState('');
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -44,8 +45,11 @@ export default function ButtonAppBar() {
             .then(data => {
                 // Extraire le nom d'utilisateur de la réponse et mettre à jour l'état
                 const userName = data.userFirstName;
+                const role = data.roleId;
                 setUserName(userName);
-                console.log("The user : " + userName + " is conected")
+                setUserRole(role);
+
+                console.log("The user : " + userName + " is conected and he have de right : " + role )
                 setIsLoggedIn(true);
                 console.log(isLoggedIn)
             })
@@ -66,8 +70,7 @@ export default function ButtonAppBar() {
     useEffect(() => {
         fetchUserData();
 
-    }, []);
-
+    }, [navigate]);
     function handleLogout() {
         const url = Constants.LOGOUT;
 
@@ -111,6 +114,7 @@ export default function ButtonAppBar() {
                                 <Typography variant="body1" sx={{ml: 1}}>Déconnexion</Typography>
                             </IconButton>
                             <Typography variant="body1" sx={{ml: 1}}>{`${userName}`}</Typography>
+                            <Typography variant="body1" sx={{ml: 1}}>{`${role}`}</Typography>
                         </>
                     )}
                 </Toolbar>

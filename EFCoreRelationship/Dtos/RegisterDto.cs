@@ -10,6 +10,7 @@ namespace EFCoreRelationship.Dtos
         public string UserEmail { get; set; }   
         public string UserPassword { get; set; }
 
+
         public double? UserPhone { get; set; }
 
 

@@ -64,41 +64,44 @@ export default function StudentCreateForm(props) {
     };
     return (
         <form action="" className="w-100 px-5" onSubmit={handleSubmit}
-              style={{display: 'flex', flexDirection: 'column', gap: '50px'}}>
+              style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', width: '100%'}}>
             <h1 className="mt-5">Create new User</h1>
 
 
 
-            <TextField type="text" value={formData.userFirstName} id="userFirstName" label="userFirstName" name="userFirstName" variant="outlined" onChange={handleChange}/>
+            <TextField type="text" value={formData.userFirstName} id="userFirstName" label="userFirstName" name="userFirstName" variant="outlined" onChange={handleChange} style={{width: '60%'}}/>
 
 
-            <TextField type="text" value={formData.userLastName} id="userLastName" label="userLastName" name="userLastName" variant="outlined" onChange={handleChange}/>
+            <TextField type="text" value={formData.userLastName} id="userLastName" label="userLastName" name="userLastName" variant="outlined" onChange={handleChange} style={{width: '60%'}}/>
 
-            <TextField type="email" value={formData.userEmail} id="userEmail" label="userEmail" name="userEmail" variant="outlined" onChange={handleChange}/>
+            <TextField type="email" value={formData.userEmail} id="userEmail" label="userEmail" name="userEmail" variant="outlined" onChange={handleChange} style={{width: '60%'}}/>
 
-            <TextField type="tel" value={formData.userPhone} id="userPhone" label="userPhone" name="userPhone" variant="outlined" onChange={handleChange}/>
+            <TextField type="tel" value={formData.userPhone} id="userPhone" label="userPhone" name="userPhone" variant="outlined" onChange={handleChange} style={{width: '60%'}}/>
 
-            <TextField type="password" value={formData.userPassword} id="userPassword" label="userPassword" name="userPassword" variant="outlined" onChange={handleChange}/>
+            <TextField type="password" value={formData.userPassword} id="userPassword" label="userPassword" name="userPassword" variant="outlined" onChange={handleChange} style={{width: '60%'}}/>
 
-            <TextField type="number" value={formData.jobId} id="jobId" label="jobId" name="jobId" variant="outlined" onChange={handleChange}/>
+            <TextField type="number" value={formData.jobId} id="jobId" label="jobId" name="jobId" variant="outlined" onChange={handleChange} style={{width: '60%'}}/>
 
-            <TextField type="number" value={formData.roleId} id="roleId" label="roleId" name="roleId" variant="outlined" onChange={handleChange}/>
+            <TextField type="number" value={formData.roleId} id="roleId" label="roleId" name="roleId" variant="outlined" onChange={handleChange} style={{width: '60%'}}/>
 
-            <TextField type="number" value={formData.projetId} id="projetId" label="projetId" name="projetId" variant="outlined" onChange={handleChange}/>
+            <TextField type="number" value={formData.projetId} id="projetId" label="projetId" name="projetId" variant="outlined" onChange={handleChange} style={{width: '60%'}}/>
 
+            <div style={{display: 'flex', flexDirection: 'row', gap: '50px'}}>
 
             <button onClick={handleSubmit} className="btn btn-dark btn-lg w-100 mt-5"
-                    style={{marginBottom: '10px', marginTop: '20px', background: '#8FC62E'}}
+                    style={{marginBottom: '10px', marginTop: '20px', background: '#8FC62E', width: '100px'}}
             >
                 Submit
             </button>
             <button
 
                 color="primary" onClick={() => props.onStudentCreated(null)}
-                className="btn secondary btn-lg w-100 mt-3">
+                className="btn secondary btn-lg w-100 mt-3"
+                style={{marginBottom: '10px', marginTop: '20px', width: '100px'}}>
 
                 Cancel
             </button>
+            </div>
 
 
         </form>

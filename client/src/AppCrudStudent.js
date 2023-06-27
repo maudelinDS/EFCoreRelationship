@@ -72,7 +72,7 @@ export default function AppCrudStudent() {
                 <NavBar showSection={false}/>
 
 
-                <TableContainer style={{width: '100%', marginTop: '200px', overflow:'hidden', overflowX: 'hidden'}}>
+                <TableContainer style={{width: '100%', marginTop: '150px', overflow: 'hidden', overflowX: 'hidden'}}>
                     <Table style={{
                         display: "flex",
                         flexDirection: "column",
@@ -82,38 +82,176 @@ export default function AppCrudStudent() {
                         tableLayout: 'fixed',
                     }}>
                         <TableHead style={{width: '98%'}}>
-                            <TableRow style={{display:'flex',width: '100%',justifyContent: 'space-between', textAlign: 'center'}}>
-                                <TableCell style={{height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>img</TableCell>
-                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>Id</TableCell>
-                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>First N.</TableCell>
-                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>Last N.</TableCell>
-                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>Email</TableCell>
+                            <TableRow style={{
+                                display: 'flex',
+                                width: '100%',
+                                justifyContent: 'space-between',
+                                textAlign: 'center'
+                            }}>
+                                <TableCell style={{
+                                    height: '80px',
+                                    width: '90px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>img</TableCell>
+                                <TableCell style={{
+                                    height: '80px',
+                                    width: '90px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>Id</TableCell>
+                                <TableCell style={{
+                                    height: '80px',
+                                    width: '90px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>First N.</TableCell>
+                                <TableCell style={{
+                                    height: '80px',
+                                    width: '90px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>Last N.</TableCell>
+                                <TableCell style={{
+                                    height: '80px',
+                                    width: '90px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>Email</TableCell>
 
-                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>Phone</TableCell>
-                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>Job</TableCell>
-                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>Role</TableCell>
-                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>Projet</TableCell>
-                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}></TableCell>
-                                <TableCell style={{ height: '80px', width: '90px',display:'flex', justifyContent: 'center', alignItems: 'center'}}></TableCell>
+                                <TableCell style={{
+                                    height: '80px',
+                                    width: '90px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>Phone</TableCell>
+                                <TableCell style={{
+                                    height: '80px',
+                                    width: '90px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>Job</TableCell>
+                                <TableCell style={{
+                                    height: '80px',
+                                    width: '90px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>Role</TableCell>
+                                <TableCell style={{
+                                    height: '80px',
+                                    width: '90px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>Projet</TableCell>
+                                <TableCell style={{
+                                    height: '80px',
+                                    width: '90px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}></TableCell>
+                                <TableCell style={{
+                                    height: '80px',
+                                    width: '90px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}></TableCell>
                             </TableRow>
                         </TableHead>
 
-                        <TableBody style={{overflow: "scroll", height: "800px", width: '100%', textAlign: 'center'}}>
+                        <TableBody style={{overflow: "scroll", height: "900px", width: '100%', textAlign: 'center'}}>
                             {users.map((user) => (
-                                    <TableRow key={user.userId} style={{display: 'flex', flexDirection:'row',justifyContent: 'space-between',alignItems:'center', padding: '16px'}}>
-                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                <TableRow key={user.userId} style={{
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    padding: '16px'
+                                }}>
+                                    <TableCell style={{
+                                        width: '90px',
+                                        height: '30px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}>
                                         <img src={UserIcon} alt="User Icon" width="24" height="24"/>
                                     </TableCell>
-                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.userId}</TableCell>
-                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.userFirstName}
+                                    <TableCell style={{
+                                        width: '90px',
+                                        height: '30px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}>{user.userId}</TableCell>
+                                    <TableCell style={{
+                                        width: '90px',
+                                        height: '30px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}>{user.userFirstName}
                                     </TableCell>
-                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center', textAlign:'center'}}>{user.userLastName/*{/* > 8 ? user.userLastName.substring(0, 4) + '...' : user.userLastName}*/}</TableCell>
-                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>  {user.userEmail}</TableCell>
-                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.userPhone}</TableCell>
-                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.jobId}</TableCell>
-                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.roleId}</TableCell>
-                                    <TableCell style={{ width: '90px',height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>{user.projetId}</TableCell>
-                                    <TableCell style={{width: '90px' , height: '80px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                    <TableCell style={{
+                                        width: '90px',
+                                        height: '30px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        textAlign: 'center'
+                                    }}>{user.userLastName/*{/* > 8 ? user.userLastName.substring(0, 4) + '...' : user.userLastName}*/}</TableCell>
+                                    <TableCell style={{
+                                        width: '90px',
+                                        height: '30px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}>  {user.userEmail}</TableCell>
+                                    <TableCell style={{
+                                        width: '90px',
+                                        height: '30px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}>{user.userPhone}</TableCell>
+                                    <TableCell style={{
+                                        width: '90px',
+                                        height: '30px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}>{user.jobId}</TableCell>
+                                    <TableCell style={{
+                                        width: '90px',
+                                        height: '30px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}>{user.roleId}</TableCell>
+                                    <TableCell style={{
+                                        width: '90px',
+                                        height: '30px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}>{user.projetId}</TableCell>
+                                    <TableCell style={{
+                                        width: '90px',
+                                        height: '30px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}>
                                         <Button
                                             variant="contained"
                                             color="primary"
@@ -125,40 +263,51 @@ export default function AppCrudStudent() {
                                         </Button>
 
                                     </TableCell>
-                                        <TableCell style={{height: '80px',display:'flex', justifyContent: 'center', alignItems: 'center'}}>
+{/*
+                                    {user.roleId !== 1 || user.roleId !== 2 && (
+*/}
+                                        <TableCell style={{
+                                            height: '30px',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center'
+                                        }}>
 
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            onClick={() => {
-                                                if (
-                                                    window.confirm(
-                                                        `Are you sure you want to delete the user "${user.userFirstName}"?`
+                                            <Button
+                                                variant="contained"
+                                                color="primary"
+                                                onClick={() => {
+                                                    if (
+                                                        window.confirm(
+                                                            `Are you sure you want to delete the user "${user.userFirstName}"?`
+                                                        )
                                                     )
-                                                )
-                                                    deleteStudent(user.userId);
-                                            }}
-                                            style={{background: 'red'}}
+                                                        deleteStudent(user.userId);
+                                                }}
+                                                style={{background: 'red'}}
 
-                                            size='small'
+                                                size='small'
 
-                                        >
-                                            Delete
-                                        </Button>
-                                    </TableCell>
+                                            >
+                                                Delete
+                                            </Button>
+                                        </TableCell>
+{/*
+                                    )}
+*/}
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => setShowingCreateNewStudentForm(true)}
-                        style={{marginBottom: '10px', marginTop: '20px', background: '#8FC62E'}}
-                    >
-                        Create new users
-                    </Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => setShowingCreateNewStudentForm(true)}
+                    style={{marginBottom: '10px', marginTop: '20px', background: '#8FC62E'}}
+                >
+                    Create new users
+                </Button>
             </Box>
         )
             ;

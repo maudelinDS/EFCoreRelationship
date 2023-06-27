@@ -24,7 +24,7 @@ export default function StudentUpdateForm(props) {
         });
     };
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(formData.userPassword, saltRounds);
 
@@ -34,7 +34,7 @@ export default function StudentUpdateForm(props) {
             userFirstName: formData.userFirstName,
             userLastName: formData.userLastName,
             userEmail: formData.userEmail,
-            userPassword:hashedPassword,
+            userPassword: hashedPassword,
             userPhone: parseInt(formData.userPhone),
             jobId: parseInt(formData.jobId),
             roleId: parseInt(formData.roleId),
@@ -72,46 +72,56 @@ export default function StudentUpdateForm(props) {
             });
 
 
-
-
-
         props.onStudentUpdated(studentToUpdate);
 
     };
     return (
-        <form action="" className="w-100 px-5" style={{display: 'flex', flexDirection: 'column', gap: '50px'}}>
+        <form action="" className="w-100 px-5"
+              style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', width: '100%'}}>
             <h1 className="mt-5">Update Student "{props.student.userFirstName}".</h1>
 
-            <TextField type="text" value={formData.userFirstName} id="userFirstName" label="userFirstName" name="userFirstName" variant="outlined" onChange={handleChange}/>
+            <TextField type="text" value={formData.userFirstName} id="userFirstName" label="userFirstName"
+                       name="userFirstName" variant="outlined" onChange={handleChange} style={{width: '60%'}}/>
 
 
-            <TextField type="text" value={formData.userLastName} id="userLastName" label="userLastName" name="userLastName" variant="outlined" onChange={handleChange}/>
+            <TextField type="text" value={formData.userLastName} id="userLastName" label="userLastName"
+                       name="userLastName" variant="outlined" onChange={handleChange} style={{width: '60%'}}/>
 
-            <TextField type="email" value={formData.userEmail} id="userEmail" label="userEmail" name="userEmail" variant="outlined" onChange={handleChange}/>
+            <TextField type="email" value={formData.userEmail} id="userEmail" label="userEmail" name="userEmail"
+                       variant="outlined" onChange={handleChange} style={{width: '60%'}}/>
 
-            <TextField type="tel" value={formData.userPhone} id="userPhone" label="userPhone" name="userPhone" variant="outlined" onChange={handleChange}/>
+            <TextField type="tel" value={formData.userPhone} id="userPhone" label="userPhone" name="userPhone"
+                       variant="outlined" onChange={handleChange} style={{width: '60%'}}/>
 
-            <TextField type="password" value={formData.userPassword} id="userPassword" label="userPassword" name="userPassword" variant="outlined" onChange={handleChange}/>
+            <TextField type="password" value={formData.userPassword} id="userPassword" label="userPassword"
+                       name="userPassword" variant="outlined" onChange={handleChange} style={{width: '60%'}}/>
 
-            <TextField type="number" value={formData.jobId} id="jobId" label="jobId" name="jobId" variant="outlined" onChange={handleChange}/>
+            <TextField type="number" value={formData.jobId} id="jobId" label="jobId" name="jobId" variant="outlined"
+                       onChange={handleChange} style={{width: '60%'}}/>
 
-            <TextField type="number" value={formData.roleId} id="roleId" label="roleId" name="roleId" variant="outlined" onChange={handleChange}/>
+            <TextField type="number" value={formData.roleId} id="roleId" label="roleId" name="roleId" variant="outlined"
+                       onChange={handleChange} style={{width: '60%'}}/>
 
-            <TextField type="number" value={formData.projetId} id="projetId" label="projetId" name="projetId" variant="outlined" onChange={handleChange}/>
+            <TextField type="number" value={formData.projetId} id="projetId" label="projetId" name="projetId"
+                       variant="outlined" onChange={handleChange} style={{width: '60%'}}/>
 
+            <div style={{display: 'flex', flexDirection: 'row', gap: '50px'}}>
 
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSubmit}
+                    style={{marginBottom: '10px', marginTop: '20px', background: '#8FC62E', width: '100px'}}
+                >
+                    Submit
+                </Button>
+                <button onClick={() => props.onStudentUpdated(null)} className="btn secondary btn-lg w-100 mt-3"
+                        style={{marginBottom: '10px', marginTop: '20px', width: '100px'}}
 
-            <Button
-                variant="contained"
-                color="primary"
-                onClick={handleSubmit}
-                style={{marginBottom: '10px', marginTop: '20px', background: '#8FC62E'}}
-            >
-                Submit
-            </Button>
-            <button onClick={() => props.onStudentUpdated(null)} className="btn secondary btn-lg w-100 mt-3">
-                Cancel
-            </button>
+                >
+                    Cancel
+                </button>
+            </div>
         </form>
     );
 }

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using System.Linq;
 
 namespace EFCoreRelationship
 {
@@ -15,7 +16,7 @@ namespace EFCoreRelationship
         public string? UserEmail { get; set;}
 
         public double? UserPhone { get; set;}
-        [JsonIgnore]
+        
         public string? UserPassword { get; set;}
 
 
@@ -35,8 +36,5 @@ namespace EFCoreRelationship
 
         [JsonIgnore]
         public List<UserProjet>? UserProjets { get; set; }
-
-
-
     }
 }

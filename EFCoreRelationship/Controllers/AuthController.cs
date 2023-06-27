@@ -25,12 +25,14 @@ namespace EFCoreRelationship.Controllers
         [HttpPost("register")]
         public IActionResult Register(RegisterDto dto)
         {
+            string salt = BCrypt.Net.BCrypt.GenerateSalt();
+
             var user = new User
             {
                 UserFirstName = dto.UserFirstName,
                 UserLastName = dto.UserLastName,
                 UserEmail = dto.UserEmail,
-                UserPassword = BCrypt.Net.BCrypt.HashPassword(dto.UserPassword),
+                UserPassword = BCrypt.Net.BCrypt.HashPassword(dto.UserPassword, salt),
                 UserPhone = dto.UserPhone,
             RoleId = dto.RoleId,
             JobId = dto.JobId,
