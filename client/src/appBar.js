@@ -45,7 +45,7 @@ export default function ButtonAppBar() {
                 // Extraire le nom d'utilisateur de la réponse et mettre à jour l'état
                 const userName = data.userFirstName;
                 setUserName(userName);
-                console.log("The user : " + userName + " is conencted")
+                console.log("The user : " + userName + " is conected")
                 setIsLoggedIn(true);
                 console.log(isLoggedIn)
             })
@@ -62,7 +62,7 @@ export default function ButtonAppBar() {
         console.log("isLoggedIn:", isLoggedIn);
     }, [isLoggedIn]);
 
-    
+
     useEffect(() => {
         fetchUserData();
 

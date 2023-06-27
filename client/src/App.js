@@ -17,11 +17,7 @@ const isLoggedIn = () => {
 export default function App() {
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!isLoggedIn()) {
-            navigate('/login', { replace: true });
-        }
-    }, [navigate]);
+
 
     return (
         <Routes>
