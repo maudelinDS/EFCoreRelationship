@@ -62,6 +62,10 @@ export default function App() {
                 element={isLoggedIn ? <Job /> : <Navigate to="/login" replace />}
             />
             <Route
+                path="/projet"
+                element={isLoggedIn ? <Job /> : <Navigate to="/login" replace />}
+            />
+            <Route
                 path="/stat"
                 element={isLoggedIn ? <Stat /> : <Navigate to="/login" replace />}
             />

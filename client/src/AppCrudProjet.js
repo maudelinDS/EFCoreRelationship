@@ -1,21 +1,19 @@
-import React, {useEffect, useState} from 'react';
-
-import Constants from "./utilities/Constants"
-import ProjetUpdateForm from "./components/ProjetUpdateForm";
+import React, {useState, useEffect} from 'react';
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button} from '@mui/material';
+import Constants from "./utilities/Constants";
 import ProjetCreateForm from "./components/ProjetCreateForm";
+import ProjetUpdateForm from "./components/ProjetUpdateForm";
 import NavBar from "./appBar";
-import Section from "./Sections";
-import StudentCreateForm from "./components/StudentCreateForm";
-import StudentUpdateForm from "./components/StudentUpdateForm";
 import Box from "@mui/material/Box";
-import {Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import UserIcon from "./images/user-solid.svg";
-
+import imageURL from "./images/JOBK_Img_HeaderMobile_Home.png";
+import Section from "./Sections";
+import UserIcon from './images/user-solid.svg';
 
 export default function AppCrudProjet() {
-    const [projets, setProjets] = useState([]);
+    const [projets, SetProjets] = useState([]);
     const [showingCreateNewProjetForm, setShowingCreateNewProjetForm] = useState(false);
-    const [projetCurrentlyBeingUpdated, setProjetCurrentlyBeingUpdated] = useState(null);
+    const [projetCurrentlyBeingUpdated, setProjetCurrentlyBeingUpdated] = useState(false);
+
     useEffect(() => {
         getProjets();
     }, []);
@@ -28,18 +26,15 @@ export default function AppCrudProjet() {
             mode: 'cors'
         })
             .then(response => response.json())
-            .then(projetFromServer => {
-                console.log(projetFromServer);
-
-                setProjets(projetFromServer);
-
+            .then(studentsFromServer => {
+                console.log(studentsFromServer);
+                SetProjets(studentsFromServer);
             })
             .catch((error) => {
                 console.log(error);
                 alert(error);
             })
     }
-
 
     function deleteProjet(projetId) {
         const url = `${Constants.API_URL_DELETE_PROJET_BY_ID}/${projetId}`;
@@ -49,11 +44,9 @@ export default function AppCrudProjet() {
             mode: 'cors'
         })
             .then(response => response.json())
-            .then(projetsFromServer => {
-                console.log(projetsFromServer);
-
-                onProjetDeleted(projetsFromServer);
-
+            .then(responseFromServer => {
+                console.log(responseFromServer);
+                onProjetDeleted(responseFromServer);
             })
             .catch((error) => {
                 console.log(error);
@@ -71,11 +64,13 @@ export default function AppCrudProjet() {
         overflowY: "hidden",
     }
 
+
     function renderProjetsTable() {
         return (
             <Box sx={containerStyles}>
 
                 <NavBar showSection={false}/>
+
 
                 <TableContainer style={{width: '100%', marginTop: '150px', overflow: 'hidden', overflowX: 'hidden'}}>
                     <Table style={{
@@ -100,7 +95,6 @@ export default function AppCrudProjet() {
                                     justifyContent: 'center',
                                     alignItems: 'center'
                                 }}>img</TableCell>
-
                                 <TableCell style={{
                                     height: '80px',
                                     width: '90px',
@@ -114,28 +108,29 @@ export default function AppCrudProjet() {
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center'
-                                }}>Name</TableCell>
+                                }}>Nom du projet</TableCell>
                                 <TableCell style={{
                                     height: '80px',
                                     width: '90px',
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center'
-                                }}>Description</TableCell>
+                                }}>Description du projet</TableCell>
+
 
                                 <TableCell style={{
                                     height: '80px',
                                     width: '90px',
                                     display: 'flex',
                                     justifyContent: 'center',
-                                    alignItems: 'center',
+                                    alignItems: 'center'
                                 }}></TableCell>
                                 <TableCell style={{
                                     height: '80px',
                                     width: '90px',
                                     display: 'flex',
                                     justifyContent: 'center',
-                                    alignItems: 'center',
+                                    alignItems: 'center'
                                 }}></TableCell>
                             </TableRow>
                         </TableHead>
@@ -173,16 +168,14 @@ export default function AppCrudProjet() {
                                         alignItems: 'center'
                                     }}>{projet.projetName}
                                     </TableCell>
-                                    <TableCell
-                                        style={{
-                                            width: '90px',
-                                            height: '30px',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            alignItems: 'center'
-                                        }}>{projet.projetDescription}</TableCell>
-
-
+                                    <TableCell style={{
+                                        width: '90px',
+                                        height: '30px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        textAlign: 'center'
+                                    }}>{projet.projetDescription/*{/* > 8 ? projet.projetDescription.substring(0, 4) + '...' : projet.projetDescription}*/}</TableCell>
                                     <TableCell style={{
                                         width: '90px',
                                         height: '30px',
@@ -194,27 +187,30 @@ export default function AppCrudProjet() {
                                             variant="contained"
                                             color="primary"
                                             onClick={() => setProjetCurrentlyBeingUpdated(projet)}
-                                            style={{background: '#141E66', padding: '3px', width: '50px'}}
+                                            style={{background: '#141E66'}}
                                             size='small'
                                         >
                                             Update
                                         </Button>
 
                                     </TableCell>
+                                    {/*
+                                    {projet.roleId !== 1 || projet.roleId !== 2 && (
+*/}
                                     <TableCell style={{
-                                        width: '90px',
                                         height: '30px',
                                         display: 'flex',
                                         justifyContent: 'center',
                                         alignItems: 'center'
                                     }}>
+
                                         <Button
                                             variant="contained"
                                             color="primary"
                                             onClick={() => {
                                                 if (
                                                     window.confirm(
-                                                        `Are you sure you want to delete the student "${projet.projetName}"?`
+                                                        `Are you sure you want to delete the projet "${projet.projetName}"?`
                                                     )
                                                 )
                                                     deleteProjet(projet.projetId);
@@ -227,6 +223,9 @@ export default function AppCrudProjet() {
                                             Delete
                                         </Button>
                                     </TableCell>
+                                    {/*
+                                    )}
+*/}
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -238,65 +237,50 @@ export default function AppCrudProjet() {
                     onClick={() => setShowingCreateNewProjetForm(true)}
                     style={{marginBottom: '10px', marginTop: '20px', background: '#8FC62E'}}
                 >
-                    Create new users
+                    Create new projets
                 </Button>
             </Box>
         )
             ;
     }
 
-
-    function onProjetCreated(createdprojet) {
+    function onProjetCreated(createdProjet) {
         setShowingCreateNewProjetForm(false);
-        if (createdprojet === null) {
+        if (createdProjet === null) {
             return;
         }
-        alert(`Projet : "${createdprojet.projetName}",has been created, will show up in the table below`)
+        alert(`Projet : "${createdProjet.projetName}", has been created, and will show up in the table below`);
         getProjets();
     }
 
-    function onProjetUpdated(updateProjet) {
-        setProjetCurrentlyBeingUpdated(null);
-        if (updateProjet === null) {
+    function onProjetUpdated(updatedProjet) {
+        setProjetCurrentlyBeingUpdated(false);
+        if (updatedProjet === null) {
             return;
         }
         let projetsCopy = [...projets];
 
-        // eslint-disable-next-line array-callback-return
-        const index = projetsCopy.findIndex((projetsCopyProjet, currentIndex) => {
-
-            if (projetsCopyProjet.projetId === updateProjet.projetId) {
-                return true;
-            }
-        });
+        const index = projetsCopy.findIndex((projet) => projet.projetId === updatedProjet.projetId);
         if (index !== -1) {
-            projetsCopy[index] = updateProjet;
+            projetsCopy[index] = updatedProjet;
         }
-        setProjets(projetsCopy);
-        alert(`Projet successfully updated "${updateProjet.projetName}"`);
+        SetProjets(projetsCopy);
+        alert(`Student successfully updated "${updatedProjet.projetName}"`);
     }
 
-    function onProjetDeleted(deleteProjetProjetId) {
-
+    function onProjetDeleted(deletedProjetId) {
         let projetsCopy = [...projets];
-
-        // eslint-disable-next-line array-callback-return
-        const index = projetsCopy.findIndex((projetsCopyProjet, currentIndex) => {
-
-            if (projetsCopyProjet.projetId === deleteProjetProjetId) {
-                return true;
-            }
-        });
+        const index = projetsCopy.findIndex((projet) => projet.projetId === deletedProjetId);
         if (index !== -1) {
             projetsCopy.splice(index, 1);
         }
-        setProjets(projetsCopy);
+        SetProjets(projetsCopy);
         alert('Projet successfully deleted');
     }
 
     return (
         <div className="container" style={{maxWidth: '100%', margin: '0'}}>
-            <div className="r   ow min-vh-100">
+            <div className="row min-vh-100">
                 <div className="col d-flex flex flex-column justify-content-center ">
                     {!showingCreateNewProjetForm && !projetCurrentlyBeingUpdated && (
                         <div>
@@ -314,4 +298,3 @@ export default function AppCrudProjet() {
         </div>
     );
 }
-

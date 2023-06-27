@@ -1,16 +1,8 @@
 import AppCrudProjet from "../AppCrudProjet";
 import React from "react";
-import NavBar from "../appBar";
 
-const Project = () => {
-
-    return  <div>
-
-        <NavBar showSection={false}/>
-
-        <AppCrudProjet/>
-    </div>
-
+const Students = () => {
+    return <AppCrudProjet/>
 };
 
-export default Project;
+export default Students;

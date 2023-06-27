@@ -24,7 +24,6 @@ namespace EFCoreRelationship.Controllers
         {
             var users = await appDbContext.Users
             .Include(u => u.UserProjets)
-            .Include(u => u.Competences)
                     .ToListAsync();
             return users;
         }
