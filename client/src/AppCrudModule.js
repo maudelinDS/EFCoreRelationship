@@ -1,25 +1,25 @@
 import React, {useState, useEffect} from 'react';
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button} from '@mui/material';
 import Constants from "./utilities/Constants";
-import DomaineCreateForm from "./components/DomaineCreateForm";
-import DomaineUpdateForm from "./components/DomaineUpdateForm";
+import ModuleCreateForm from "./components/ModuleCreateForm";
+import ModuleUpdateForm from "./components/ModuleUpdateForm";
 import NavBar from "./appBar";
 import Box from "@mui/material/Box";
 import imageURL from "./images/JOBK_Img_HeaderMobile_Home.png";
 import Section from "./Sections";
 import UserIcon from './images/user-solid.svg';
 
-export default function AppCrudDomaine() {
-    const [domaines, SetDomaines] = useState([]);
-    const [showingCreateNewDomaineForm, setShowingCreateNewDomaineForm] = useState(false);
-    const [domaineCurrentlyBeingUpdated, setDomaineCurrentlyBeingUpdated] = useState(false);
+export default function AppCrudModule() {
+    const [modules, SetModules] = useState([]);
+    const [showingCreateNewModuleForm, setShowingCreateNewModuleForm] = useState(false);
+    const [moduleCurrentlyBeingUpdated, setModuleCurrentlyBeingUpdated] = useState(false);
 
     useEffect(() => {
-        getDomaines();
+        getModules();
     }, []);
 
-    function getDomaines() {
-        const url = Constants.API_URL_GET_ALL_DOMAINES;
+    function getModules() {
+        const url = Constants.API_URL_GET_ALL_MODULES;
 
         fetch(url, {
             method: 'GET',
@@ -28,7 +28,7 @@ export default function AppCrudDomaine() {
             .then(response => response.json())
             .then(studentsFromServer => {
                 console.log(studentsFromServer);
-                SetDomaines(studentsFromServer);
+                SetModules(studentsFromServer);
             })
             .catch((error) => {
                 console.log(error);
@@ -36,8 +36,8 @@ export default function AppCrudDomaine() {
             })
     }
 
-    function deleteDomaine(domaineId) {
-        const url = `${Constants.API_URL_DELETE_DOMAINE_BY_ID}/${domaineId}`;
+    function deleteModule(moduleId) {
+        const url = `${Constants.API_URL_DELETE_MODULE_BY_ID}/${moduleId}`;
 
         fetch(url, {
             method: 'DELETE',
@@ -46,7 +46,7 @@ export default function AppCrudDomaine() {
             .then(response => response.json())
             .then(responseFromServer => {
                 console.log(responseFromServer);
-                onStudentDeleted(responseFromServer);
+                onModuleDeleted(responseFromServer);
             })
             .catch((error) => {
                 console.log(error);
@@ -65,7 +65,7 @@ export default function AppCrudDomaine() {
     }
 
 
-    function renderDomainesTable() {
+    function renderModulesTable() {
         return (
             <Box sx={containerStyles}>
 
@@ -108,21 +108,14 @@ export default function AppCrudDomaine() {
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center'
-                                }}>Nom du Domaine</TableCell>
+                                }}>Nom du Module</TableCell>
                                 <TableCell style={{
                                     height: '80px',
                                     width: '90px',
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center'
-                                }}>Description du Domaine</TableCell>
-                                <TableCell style={{
-                                    height: '80px',
-                                    width: '90px',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center'
-                                }}>Job</TableCell>
+                                }}>Lieux du Module</TableCell>
 
 
                                 <TableCell style={{
@@ -143,8 +136,8 @@ export default function AppCrudDomaine() {
                         </TableHead>
 
                         <TableBody style={{overflow: "scroll", height: "900px", width: '100%', textAlign: 'center'}}>
-                            {domaines.map((domaine) => (
-                                <TableRow key={domaine.domaineId} style={{
+                            {modules.map((module) => (
+                                <TableRow key={module.moduleId} style={{
                                     display: 'flex',
                                     flexDirection: 'row',
                                     justifyContent: 'space-between',
@@ -166,14 +159,14 @@ export default function AppCrudDomaine() {
                                         display: 'flex',
                                         justifyContent: 'center',
                                         alignItems: 'center'
-                                    }}>{domaine.domaineId}</TableCell>
+                                    }}>{module.moduleId}</TableCell>
                                     <TableCell style={{
                                         width: '90px',
                                         height: '30px',
                                         display: 'flex',
                                         justifyContent: 'center',
                                         alignItems: 'center'
-                                    }}>{domaine.domaineName}
+                                    }}>{module.moduleName}
                                     </TableCell>
                                     <TableCell style={{
                                         width: '90px',
@@ -182,15 +175,8 @@ export default function AppCrudDomaine() {
                                         justifyContent: 'center',
                                         alignItems: 'center',
                                         textAlign: 'center'
-                                    }}>{domaine.domaineDescription/*{/* > 8 ? domaine.DomaineDescription.substring(0, 4) + '...' : domaine.DomaineDescription}*/}</TableCell>
+                                    }}>{module.moduleLieux/*{/* > 8 ? module.moduleLieux.substring(0, 4) + '...' : module.moduleLieux}*/}</TableCell>
 
-                                    <TableCell style={{
-                                        width: '90px',
-                                        height: '30px',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center'
-                                    }}>{domaine.jobId}</TableCell>
                                     <TableCell style={{
                                         width: '90px',
                                         height: '30px',
@@ -201,7 +187,7 @@ export default function AppCrudDomaine() {
                                         <Button
                                             variant="contained"
                                             color="primary"
-                                            onClick={() => setDomaineCurrentlyBeingUpdated(domaine)}
+                                            onClick={() => setModuleCurrentlyBeingUpdated(module)}
                                             style={{background: '#141E66'}}
                                             size='small'
                                         >
@@ -209,36 +195,36 @@ export default function AppCrudDomaine() {
                                         </Button>
 
                                     </TableCell>
-                                    {/*
-                                    {domaine.roleId !== 1 || domaine.roleId !== 2 && (
+{/*
+                                    {module.roleId !== 1 || module.roleId !== 2 && (
 */}
-                                    <TableCell style={{
-                                        height: '30px',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center'
-                                    }}>
+                                        <TableCell style={{
+                                            height: '30px',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center'
+                                        }}>
 
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            onClick={() => {
-                                                if (
-                                                    window.confirm(
-                                                        `Are you sure you want to delete the domaine "${domaine.domaineName}"?`
+                                            <Button
+                                                variant="contained"
+                                                color="primary"
+                                                onClick={() => {
+                                                    if (
+                                                        window.confirm(
+                                                            `Are you sure you want to delete the module "${module.moduleName}"?`
+                                                        )
                                                     )
-                                                )
-                                                    deleteDomaine(domaine.domaineId);
-                                            }}
-                                            style={{background: 'red'}}
+                                                        deleteModule(module.moduleId);
+                                                }}
+                                                style={{background: 'red'}}
 
-                                            size='small'
+                                                size='small'
 
-                                        >
-                                            Delete
-                                        </Button>
-                                    </TableCell>
-                                    {/*
+                                            >
+                                                Delete
+                                            </Button>
+                                        </TableCell>
+{/*
                                     )}
 */}
                                 </TableRow>
@@ -249,64 +235,64 @@ export default function AppCrudDomaine() {
                 <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => setShowingCreateNewDomaineForm(true)}
+                    onClick={() => setShowingCreateNewModuleForm(true)}
                     style={{marginBottom: '10px', marginTop: '20px', background: '#8FC62E'}}
                 >
-                    Create new domaines
+                    Create new modules
                 </Button>
             </Box>
         )
             ;
     }
 
-    function onDomaineCreated(createdDomaine) {
-        setShowingCreateNewDomaineForm(false);
-        if (createdDomaine === null) {
+    function onModuleCreated(createdModule) {
+        setShowingCreateNewModuleForm(false);
+        if (createdModule === null) {
             return;
         }
-        alert(`Domaine : "${createdDomaine.domaineName}", has been created, and will show up in the table below`);
-        getDomaines();
+        alert(`Module : "${createdModule.moduleName}", has been created, and will show up in the table below`);
+        getModules();
     }
 
-    function onDomaineUpdated(updatedDomaine) {
-        setDomaineCurrentlyBeingUpdated(false);
-        if (updatedDomaine === null) {
+    function onModuleUpdated(updatedModule) {
+        setModuleCurrentlyBeingUpdated(false);
+        if (updatedModule === null) {
             return;
         }
-        let domainesCopy = [...domaines];
+        let modulesCopy = [...modules];
 
-        const index = domainesCopy.findIndex((domaine) => domaine.domaineId === updatedDomaine.domaineId);
+        const index = modulesCopy.findIndex((module) => module.moduleId === updatedModule.moduleId);
         if (index !== -1) {
-            domainesCopy[index] = updatedDomaine;
+            modulesCopy[index] = updatedModule;
         }
-        SetDomaines(domainesCopy);
-        alert(`Student successfully updated "${updatedDomaine.domaineName}"`);
+        SetModules(modulesCopy);
+        alert(`Module successfully updated "${updatedModule.moduleName}"`);
     }
 
-    function onStudentDeleted(deletedDomaineId) {
-        let domainesCopy = [...domaines];
-        const index = domainesCopy.findIndex((domaine) => domaine.domaineId === deletedDomaineId);
+    function onModuleDeleted(deletedModuleId) {
+        let modulesCopy = [...modules];
+        const index = modulesCopy.findIndex((module) => module.moduleId === deletedModuleId);
         if (index !== -1) {
-            domainesCopy.splice(index, 1);
+            modulesCopy.splice(index, 1);
         }
-        SetDomaines(domainesCopy);
-        alert('Domaine successfully deleted');
+        SetModules(modulesCopy);
+        alert('Module successfully deleted');
     }
 
     return (
         <div className="container" style={{maxWidth: '100%', margin: '0'}}>
             <div className="row min-vh-100">
                 <div className="col d-flex flex flex-column justify-content-center ">
-                    {!showingCreateNewDomaineForm && !domaineCurrentlyBeingUpdated && (
+                    {!showingCreateNewModuleForm && !moduleCurrentlyBeingUpdated && (
                         <div>
-                            {domaines.length > 0 && renderDomainesTable()}
+                            {modules.length > 0 && renderModulesTable()}
                         </div>
                     )}
-                    {showingCreateNewDomaineForm && (
-                        <DomaineCreateForm onDomaineCreated={onDomaineCreated}/>
+                    {showingCreateNewModuleForm && (
+                        <ModuleCreateForm onModuleCreated={onModuleCreated}/>
                     )}
-                    {domaineCurrentlyBeingUpdated && (
-                        <DomaineUpdateForm domaine={domaineCurrentlyBeingUpdated} onDomaineUpdated={onDomaineUpdated}/>
+                    {moduleCurrentlyBeingUpdated && (
+                        <ModuleUpdateForm module={moduleCurrentlyBeingUpdated} onModuleUpdated={onModuleUpdated}/>
                     )}
                 </div>
             </div>

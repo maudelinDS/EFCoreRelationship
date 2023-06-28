@@ -10,6 +10,7 @@ import Login from "./pages/LoginPage";
 import Home from "./pages/HomePage";
 import Teacher from "./pages/TeacherPage";
 import Domaine from "./pages/DomainePage";
+import Module from "./pages/ModulePage";
 import Cookies from 'js-cookie';
 
 export default function App() {
@@ -47,48 +48,7 @@ export default function App() {
             setIsLoggedIn(true);
         }
     }, []);
-/*
-    return (
-        <Routes>
-            <Route
-                path="/login"
-                element={<Login onLogin={handleLogin} />}
-            />
-            {isLoggedIn ? (
-                <>
-                    <Route
-                        path="/home"
-                        element={<Home />}
-                    />
-                    <Route
-                        path="/student"
-                        element={<Student />}
-                    />
-                    <Route
-                        path="/teacher"
-                        element={<Teacher />}
-                    />
-                    <Route
-                        path="/projet"
-                        element={<Projet />}
-                    />
-                    <Route
-                        path="/job"
-                        element={<Job />}
-                    />
-                    <Route
-                        path="/stat"
-                        element={<Stat />}
-                    />
-                    {/!* ... Rest of the routes *!/}
-                </>
-            ) : null}
-            <Route
-                path="/!*"
-                element={<Navigate to="/login" replace />}
-            />
-        </Routes>
-    );*/
+
 
     return (
         <Routes>
@@ -121,6 +81,10 @@ export default function App() {
                     <Route
                         path="/domaine"
                         element={<Domaine />}
+                    />
+                    <Route
+                        path="/module"
+                        element={<Module />}
                     />
                     <Route
                         path="/stat"

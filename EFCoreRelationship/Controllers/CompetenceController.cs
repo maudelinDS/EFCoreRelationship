@@ -43,7 +43,7 @@ namespace EFCoreRelationship.Controllers
             return CreatedAtAction(nameof(GetCompetenceById), new { competenceId = competence.CompetenceId }, competence);
         }
 
-        [HttpDelete("{competenceId}:int")]
+        [HttpDelete("{competenceId:int}")]
         public async Task<IActionResult> DeleteCompetence(int competenceId)
         {
             var competences = await appDbContext.Competences.FindAsync(competenceId);
@@ -59,7 +59,7 @@ namespace EFCoreRelationship.Controllers
             return NoContent();
         }
 
-        [HttpPut("{competenceId}:int")]
+        [HttpPut("{competenceId:int}")]
         public async Task<IActionResult> UpdateCompetenceById(int competenceId, Competence updatedcompetence)
         {
             var competence = await appDbContext.Competences.FindAsync(competenceId);

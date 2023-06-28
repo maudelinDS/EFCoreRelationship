@@ -45,7 +45,7 @@ namespace EFCoreRelationship.Controllers
             return CreatedAtAction(nameof(GetDomaineById), new { domaineId = domaine.DomaineId }, domaine);
         }
 
-        [HttpDelete("{domaineId}:int")]
+        [HttpDelete("{domaineId:int}")]
         public async Task<IActionResult> DeleteDomaine(int domaineId)
         {
             var domaine = await appDbContext.Domaines.FindAsync(domaineId);
@@ -61,7 +61,7 @@ namespace EFCoreRelationship.Controllers
             return NoContent();
         }
 
-        [HttpPut("{domaineId}:int")]
+        [HttpPut("{domaineId:int}")]
         public async Task<IActionResult> UpdateDomaineById(int domaineId, Domaine updatedDomaine)
         {
             var domaine = await appDbContext.Domaines.FindAsync(domaineId);

@@ -41,7 +41,7 @@ namespace EFCoreRelationship.Controllers
             return CreatedAtAction(nameof(GetModuleById), new { moduleId = module.ModuleId }, module);
         }
 
-        [HttpDelete("{moduleId}:int")]
+        [HttpDelete("{moduleId:int}")]
         public async Task<IActionResult> DeleteModule(int moduleId)
         {
             var module = await appDbContext.Modules.FindAsync(moduleId);
@@ -57,7 +57,7 @@ namespace EFCoreRelationship.Controllers
             return NoContent();
         }
 
-        [HttpPut("{moduleId}:int")]
+        [HttpPut("{moduleId:int}")]
         public async Task<IActionResult> UpdateModuleById(int moduleId, Module updatedModule)
         {
             var module = await appDbContext.Modules.FindAsync(moduleId);
