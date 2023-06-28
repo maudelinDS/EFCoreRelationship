@@ -45,6 +45,7 @@ export default function SignIn(props) {
 
                 if (jwt) {
                     Cookies.set('jwt', jwt);
+                    Cookies.set('jwt', jwt, { path: '/' });
                     props.onLogin();
                     navigate("/student");
                 }

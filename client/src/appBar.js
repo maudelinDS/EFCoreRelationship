@@ -27,6 +27,7 @@ export default function ButtonAppBar() {
     const fetchUserData = () => {
         // Effectuer une requête GET vers votre point de terminaison "user"
 
+        const jwt = Cookies.get('jwt');
 
         const url = Constants.CONNECTE;
 
@@ -87,6 +88,7 @@ export default function ButtonAppBar() {
 
                     window.location.href = '/login';
                     setIsLoggedIn(false);
+                    Cookies.remove('jwt', { path: '/' });
 
                 } else {
                     console.log('Échec de la déconnexion');
