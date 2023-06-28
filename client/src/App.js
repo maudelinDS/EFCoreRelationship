@@ -9,6 +9,7 @@ import Stat from "./pages/StatPage";
 import Login from "./pages/LoginPage";
 import Home from "./pages/HomePage";
 import Teacher from "./pages/TeacherPage";
+import Domaine from "./pages/DomainePage";
 import Cookies from 'js-cookie';
 
 export default function App() {
@@ -116,6 +117,10 @@ export default function App() {
                     <Route
                         path="/competence"
                         element={<Competence />}
+                    />
+                    <Route
+                        path="/domaine"
+                        element={<Domaine />}
                     />
                     <Route
                         path="/stat"

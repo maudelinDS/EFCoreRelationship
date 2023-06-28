@@ -74,6 +74,13 @@ const Section = () => {
                 }}>
                     <Link to="/competence">Compétences</Link>
                 </ListItem>
+                <ListItem style={{
+                    display: 'flex',
+
+                    justifyContent: "center",
+                }}>
+                    <Link to="/domaine">Domaines</Link>
+                </ListItem>
 
                 <ListItem style={{
                     display: 'flex',
