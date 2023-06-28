@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button} from '@mui/material';
 import Constants from "./utilities/Constants";
-import StudentCreateForm from "./components/StudentCreateForm";
-import StudentUpdateForm from "./components/StudentUpdateForm";
+import DomaineCreateForm from "./components/DomaineCreateForm";
+import DomaineUpdateForm from "./components/DomaineUpdateForm";
 import NavBar from "./appBar";
 import Box from "@mui/material/Box";
 import imageURL from "./images/JOBK_Img_HeaderMobile_Home.png";
@@ -225,7 +225,7 @@ export default function AppCrudDomaine() {
                                             onClick={() => {
                                                 if (
                                                     window.confirm(
-                                                        `Are you sure you want to delete the domaine "${domaine.DomaineName}"?`
+                                                        `Are you sure you want to delete the domaine "${domaine.domaineName}"?`
                                                     )
                                                 )
                                                     deleteDomaine(domaine.domaineId);
@@ -264,7 +264,7 @@ export default function AppCrudDomaine() {
         if (createdDomaine === null) {
             return;
         }
-        alert(`Domaine : "${createdDomaine.DomaineName}", has been created, and will show up in the table below`);
+        alert(`Domaine : "${createdDomaine.domaineName}", has been created, and will show up in the table below`);
         getDomaines();
     }
 
@@ -280,7 +280,7 @@ export default function AppCrudDomaine() {
             domainesCopy[index] = updatedDomaine;
         }
         SetDomaines(domainesCopy);
-        alert(`Student successfully updated "${updatedDomaine.DomaineName}"`);
+        alert(`Student successfully updated "${updatedDomaine.domaineName}"`);
     }
 
     function onStudentDeleted(deletedStudentId) {
@@ -303,10 +303,10 @@ export default function AppCrudDomaine() {
                         </div>
                     )}
                     {showingCreateNewDomaineForm && (
-                        <StudentCreateForm onDomaineCreated={onDomaineCreated}/>
+                        <DomaineCreateForm onDomaineCreated={onDomaineCreated}/>
                     )}
                     {domaineCurrentlyBeingUpdated && (
-                        <StudentUpdateForm student={domaineCurrentlyBeingUpdated} onDomaineUpdated={onDomaineUpdated}/>
+                        <DomaineUpdateForm domaine={domaineCurrentlyBeingUpdated} onDomaineUpdated={onDomaineUpdated}/>
                     )}
                 </div>
             </div>
