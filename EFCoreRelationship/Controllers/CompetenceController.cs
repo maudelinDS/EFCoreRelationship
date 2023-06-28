@@ -70,6 +70,7 @@ namespace EFCoreRelationship.Controllers
             }
             competence.CompetenceName = updatedcompetence.CompetenceName;
             competence.CompetenceDescription = updatedcompetence.CompetenceDescription;
+            competence.DomaineId = updatedcompetence.DomaineId;
 
 
             appDbContext.Competences.Update(competence);

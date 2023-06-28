@@ -22,41 +22,43 @@ export default function ButtonAppBar() {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const fetchUserData = () => {
-        const jwt = Cookies.get('jwt');
-        const url = Constants.CONNECTE;
 
-        fetch(url, {
-            method: 'GET',
-            credentials: 'include',
-        })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Échec de la récupération de l\'utilisateur connecté');
-                }
+    const fetchUserData = () => {
+        setTimeout(() => {
+            const jwt = Cookies.get('jwt');
+            console.log(jwt);
+            const url = Constants.CONNECTE;
+
+            fetch(url, {
+                method: 'GET',
+                credentials: 'include',
             })
-            .then(data => {
-                const userName = data.userFirstName;
-                const role = data.roleId;
-                setUserName(userName);
-                setUserRole(role);
-                setIsLoggedIn(true);
-            })
-            .catch(error => {
-                console.error(error);
-                setIsLoggedIn(false);
-            });
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Échec de la récupération de l\'utilisateur connecté');
+                    }
+                })
+                .then(data => {
+                    const userName = data.userFirstName;
+                    const role = data.roleId;
+                    setUserName(userName);
+                    setUserRole(role);
+                    setIsLoggedIn(true);
+                })
+                .catch(error => {
+                    console.error(error);
+                    setIsLoggedIn(false);
+                });
+        }, 1000)
     };
 
     useEffect(() => {
         fetchUserData();
     }, [navigate]);
 
-    useEffect(() => {
-        console.log(isLoggedIn); // Exécuté après la mise à jour de l'état
-    }, [isLoggedIn]);
+
 
     function handleLogout() {
         const url = Constants.LOGOUT;
@@ -67,11 +69,15 @@ export default function ButtonAppBar() {
         })
             .then(response => {
                 if (response.ok) {
+
+
                     Cookies.remove('jwt');
+                    setIsLoggedIn(false);
+
                     fetchUserData();
                     navigate('/login');
-                    setIsLoggedIn(false);
                     Cookies.remove('jwt', { path: '/' });
+                    localStorage.removeItem('isLoggedIn');
 
                 } else {
                     console.log('Échec de la déconnexion');

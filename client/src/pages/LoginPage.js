@@ -15,9 +15,11 @@ import Cookies from 'js-cookie';
 export default function SignIn(props) {
     const navigate = useNavigate();
     const [userName, setUserName] = useState("");
+    const [isLoggedIn, setLoggedIn] = useState(false);
 
     const handleLogin = () => {
         props.onLogin(true);
+        setLoggedIn(true);
         localStorage.setItem('lastVisitedPage', window.location.pathname);
         navigate("/home");
     };
@@ -58,13 +60,15 @@ export default function SignIn(props) {
             console.error(error);
         }
     };
-
     useEffect(() => {
         const jwt = Cookies.get('jwt');
         if (jwt) {
-            handleLogin();
+            setLoggedIn(true);
+            console.log(isLoggedIn + "dlkfdkf")
         }
     }, []);
+
+
 
     const containerStyles = {
         height: "100vh",
@@ -76,7 +80,13 @@ export default function SignIn(props) {
         justifyContent: "center",
         alignItems: "center",
     };
+    useEffect(() => {
+        const jwt = Cookies.get('jwt');
+        if (jwt) {
+            setLoggedIn(true);
 
+        }
+    }, []);
     return (
         <Box sx={containerStyles}>
             <NavBar onLogin={setUserName} />

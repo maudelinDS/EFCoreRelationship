@@ -4,6 +4,7 @@ import Layout from "./pages/Layout";
 import Student from "./pages/StudentPage";
 import Projet from "./pages/ProjectPage";
 import Job from "./pages/JobPage";
+import Competence from "./pages/CompetencePage";
 import Stat from "./pages/StatPage";
 import Login from "./pages/LoginPage";
 import Home from "./pages/HomePage";
@@ -33,6 +34,7 @@ export default function App() {
         console.log(isLoggedIn);
         localStorage.removeItem('isLoggedIn');
         Cookies.remove('isLoggedIn');
+        localStorage.setItem('isLoggedIn', 'false');
 
     };
 
@@ -110,6 +112,10 @@ export default function App() {
                     <Route
                         path="/job"
                         element={<Job />}
+                    />
+                    <Route
+                        path="/competence"
+                        element={<Competence />}
                     />
                     <Route
                         path="/stat"

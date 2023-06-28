@@ -26,11 +26,11 @@ const ENDPOINTS = {
     UPDATE_ROLE: 'api/roles',
     DELETE_ROLE_BY_ID: 'api/roles',
 
-    GET_ALL_COMPETENCES: 'api/Competences',
-    GET_COMPETENCE_BY_ID: 'api/Competences',
-    CREATE_COMPETENCE: 'api/Competences',
-    UPDATE_COMPETENCE: 'api/Competences',
-    DELETE_COMPETENCE_BY_ID: 'api/Competences',
+    GET_ALL_COMPETENCES: 'api/Competence',
+    GET_COMPETENCE_BY_ID: 'api/Competence',
+    CREATE_COMPETENCE: 'api/Competence',
+    UPDATE_COMPETENCE: 'api/Competence',
+    DELETE_COMPETENCE_BY_ID: 'api/Competence',
 
 
     LOGIN: 'api/login',
