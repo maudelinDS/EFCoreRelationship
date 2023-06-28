@@ -1,26 +1,27 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Button from "@mui/material/Button";
-import {Container, TextField} from "@mui/material";
+import { Container, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
 import imageURL from "../images/JOBK_Img_HeaderMobile_Home.png";
 import NavBar from "../appBar";
 import Constants from "../utilities/Constants";
-import {useNavigate} from 'react-router-dom';
-import {useState} from "react";
+import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
 import Cookies from 'js-cookie';
-
 
 export default function SignIn(props) {
     const navigate = useNavigate();
     const [userName, setUserName] = useState("");
 
-    const isLoggedIn = () => {
-        const jwt = Cookies.get('jwt');
-        return !!jwt;
+    const handleLogin = () => {
+        props.onLogin(true);
+        localStorage.setItem('lastVisitedPage', window.location.pathname);
+        navigate("/home");
     };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -41,13 +42,14 @@ export default function SignIn(props) {
 
             if (response.ok) {
                 const responseData = await response.json();
-                const jwt = responseData.jwt;
+                const responseJwt = responseData.jwt;
 
-                if (jwt) {
-                    Cookies.set('jwt', jwt);
-                    Cookies.set('jwt', jwt, { path: '/' });
-                    props.onLogin();
-                    navigate("/student");
+                if (responseJwt) {
+                    Cookies.set('jwt', responseJwt);
+                    Cookies.set('jwt', responseJwt, { path: '/' });
+                    handleLogin();
+                    localStorage.setItem('isLoggedIn', 'true');
+                    console.log('Connexion réussie');
                 }
             } else {
                 throw new Error('Échec de la connexion');
@@ -56,11 +58,13 @@ export default function SignIn(props) {
             console.error(error);
         }
     };
+
     useEffect(() => {
-        if (isLoggedIn()) {
-            navigate("/student");
+        const jwt = Cookies.get('jwt');
+        if (jwt) {
+            handleLogin();
         }
-    }, [navigate]);
+    }, []);
 
     const containerStyles = {
         height: "100vh",
@@ -72,11 +76,12 @@ export default function SignIn(props) {
         justifyContent: "center",
         alignItems: "center",
     };
+
     return (
         <Box sx={containerStyles}>
-            <NavBar onLogin={setUserName}/>
-            <Container component="main" maxWidth="sm" sx={{background: '#fff',}}>
-                <Typography component="h1" variant="h5" sx={{mt: 5}}>
+            <NavBar onLogin={setUserName} />
+            <Container component="main" maxWidth="sm" sx={{ background: '#fff' }}>
+                <Typography component="h1" variant="h5" sx={{ mt: 5 }}>
                     Se connecter
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{
@@ -88,7 +93,7 @@ export default function SignIn(props) {
                         required
                         fullWidth
                         id="UserEmail"
-                        label="Addresse mail"
+                        label="Adresse mail"
                         name="UserEmail"
                         autoComplete="email"
                         autoFocus
@@ -99,7 +104,7 @@ export default function SignIn(props) {
                         fullWidth
                         name="UserPassword"
                         label="Mot de passe"
-                        type="UserPassword"
+                        type="password"
                         id="UserPassword"
                         autoComplete="current-password"
                     />
@@ -108,19 +113,12 @@ export default function SignIn(props) {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{mt: 3, mb: 5, background: '#8FC62E'}}
+                        sx={{ mt: 3, mb: 5, background: '#8FC62E' }}
                     >
                         Se connecter
                     </Button>
-
                 </Box>
             </Container>
         </Box>
     );
 }
-
-
-
-
-
-

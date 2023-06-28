@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import { Routes, Route, Navigate, useNavigate, BrowserRouter as Router } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from "./pages/Layout";
 import Student from "./pages/StudentPage";
-import Project from "./pages/ProjectPage";
+import Projet from "./pages/ProjectPage";
 import Job from "./pages/JobPage";
 import Stat from "./pages/StatPage";
 import Login from "./pages/LoginPage";
@@ -10,66 +10,117 @@ import Home from "./pages/HomePage";
 import Teacher from "./pages/TeacherPage";
 import Cookies from 'js-cookie';
 
-
 export default function App() {
-    const navigate = useNavigate();
-
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userRole, setUserRole] = useState(null);
+    const lastVisitedPage = localStorage.getItem('lastVisitedPage');
+    const initialRoute = lastVisitedPage || '/home';
+    const [isInitialized, setIsInitialized] = useState(false);
+
+    useEffect(() => {
+        setIsInitialized(true);
+    }, []);
 
     const handleLogin = () => {
         setIsLoggedIn(true);
+        console.log(isLoggedIn);
+        localStorage.setItem('isLoggedIn', 'true');
     };
 
     const handleLogout = () => {
         setIsLoggedIn(false);
         Cookies.remove('jwt');
+        console.log(isLoggedIn);
+        localStorage.removeItem('isLoggedIn');
+        Cookies.remove('isLoggedIn');
+
     };
-    console.log(isLoggedIn)
 
     useEffect(() => {
-        const jwt = Cookies.get('jwt');
-        if (jwt) {
+        const isLoggedInCookie = Cookies.get('isLoggedIn');
+
+    //    const isLoggedInStorage = localStorage.getItem('isLoggedIn');
+        if (isLoggedInCookie === 'true') {
             setIsLoggedIn(true);
         }
     }, []);
+/*
     return (
         <Routes>
             <Route
                 path="/login"
-                element={
-                    isLoggedIn ? <Navigate to="/home" replace /> : <Login onLogin={handleLogin} />
-                }
+                element={<Login onLogin={handleLogin} />}
             />
+            {isLoggedIn ? (
+                <>
+                    <Route
+                        path="/home"
+                        element={<Home />}
+                    />
+                    <Route
+                        path="/student"
+                        element={<Student />}
+                    />
+                    <Route
+                        path="/teacher"
+                        element={<Teacher />}
+                    />
+                    <Route
+                        path="/projet"
+                        element={<Projet />}
+                    />
+                    <Route
+                        path="/job"
+                        element={<Job />}
+                    />
+                    <Route
+                        path="/stat"
+                        element={<Stat />}
+                    />
+                    {/!* ... Rest of the routes *!/}
+                </>
+            ) : null}
             <Route
-                path="/home"
-                element={isLoggedIn ? <Home /> : <Navigate to="/home" replace />}
+                path="/!*"
+                element={<Navigate to="/login" replace />}
             />
-            <Route
-                path="/student"
-                element={isLoggedIn ? <Student /> : <Navigate to="/login" replace />}
-            />
-            <Route
-                path="/teacher"
-                element={isLoggedIn ? <Teacher /> : <Navigate to="/login" replace />}
-            />
-            <Route
-                path="/projet"
-                element={isLoggedIn ? <Project /> : <Navigate to="/login" replace />}
-            />
-            <Route
-                path="/job"
-                element={isLoggedIn ? <Job /> : <Navigate to="/login" replace />}
-            />
-            <Route
-                path="/projet"
-                element={isLoggedIn ? <Job /> : <Navigate to="/login" replace />}
-            />
-            <Route
-                path="/stat"
-                element={isLoggedIn ? <Stat /> : <Navigate to="/login" replace />}
-            />
-            <Route path="/*" element={<Navigate to="/login" replace />} />
+        </Routes>
+    );*/
+
+    return (
+        <Routes>
+            {isLoggedIn ? (
+                <>
+                    <Route
+                        path="/home"
+                        element={<Home />}
+                    />
+                    <Route
+                        path="/student"
+                        element={<Student />}
+                    />
+                    <Route
+                        path="/teacher"
+                        element={<Teacher />}
+                    />
+                    <Route
+                        path="/projet"
+                        element={<Projet />}
+                    />
+                    <Route
+                        path="/job"
+                        element={<Job />}
+                    />
+                    <Route
+                        path="/stat"
+                        element={<Stat />}
+                    />
+                    <Route path="/login" element={<Login onLogin={handleLogin} />} />
+
+                </>
+            ) : (
+                <Route path="/*" element={<Navigate to="/login" replace />} />
+            )}
         </Routes>
     );
 }
