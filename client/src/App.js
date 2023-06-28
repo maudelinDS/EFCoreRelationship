@@ -11,6 +11,7 @@ import Home from "./pages/HomePage";
 import Teacher from "./pages/TeacherPage";
 import Domaine from "./pages/DomainePage";
 import Module from "./pages/ModulePage";
+import Role from "./pages/RolePage";
 import Cookies from 'js-cookie';
 
 export default function App() {
@@ -85,6 +86,10 @@ export default function App() {
                     <Route
                         path="/module"
                         element={<Module />}
+                    />
+                    <Route
+                        path="/role"
+                        element={<Role />}
                     />
                     <Route
                         path="/stat"
